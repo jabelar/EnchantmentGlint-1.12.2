@@ -3,6 +3,7 @@ package com.blogspot.jabelarminecraft.enchantmentglint.client.renderers;
 import java.util.List;
 
 import com.blogspot.jabelarminecraft.enchantmentglint.MainMod;
+import com.blogspot.jabelarminecraft.enchantmentglint.init.ModConfig;
 import com.blogspot.jabelarminecraft.enchantmentglint.proxy.ClientProxy;
 
 import net.minecraft.block.state.IBlockState;
@@ -32,6 +33,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class ModRenderItem extends RenderItem
 {
+    private static final ResourceLocation RES_ITEM_GLINT_RUNE = new ResourceLocation(MainMod.MODID, "textures/misc/enchanted_item_glint_rune.png");
     private static final ResourceLocation RES_ITEM_GLINT = new ResourceLocation(MainMod.MODID, "textures/misc/enchanted_item_glint.png");
     private final TextureManager textureManager;
     private final ItemColors itemColors;
@@ -44,9 +46,6 @@ public class ModRenderItem extends RenderItem
         textureManager = parTextureManager;
         itemColors = parItemColors;
         itemModelMesher = parItemModelMesher;
-        
-        // DEBUG
-        System.out.println("Replacing RenderItem with custom version");
     }
 
     @Override
@@ -83,7 +82,14 @@ public class ModRenderItem extends RenderItem
         GlStateManager.depthFunc(514);
         GlStateManager.disableLighting();
         GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-        textureManager.bindTexture(RES_ITEM_GLINT);
+        if (ModConfig.useRuneTexture) 
+        {
+            textureManager.bindTexture(RES_ITEM_GLINT_RUNE);
+        }
+        else
+        {
+            textureManager.bindTexture(RES_ITEM_GLINT);
+        }
         GlStateManager.matrixMode(5890);
         GlStateManager.pushMatrix();
         GlStateManager.scale(16.0F, 16.0F, 16.0F);

@@ -31,6 +31,7 @@ import com.blogspot.jabelarminecraft.enchantmentglint.client.renderers.ModRender
 import com.blogspot.jabelarminecraft.enchantmentglint.client.renderers.ModRenderWitherSkeleton;
 import com.blogspot.jabelarminecraft.enchantmentglint.client.renderers.ModRenderZombie;
 import com.blogspot.jabelarminecraft.enchantmentglint.client.renderers.ModRenderZombieVillager;
+import com.blogspot.jabelarminecraft.enchantmentglint.init.ModConfig;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemRenderer;
@@ -123,6 +124,11 @@ public class ClientProxy implements IProxy
      
     public static int getColorForEnchantment(Map<Enchantment, Integer> enchMap)
     {
+        if (!ModConfig.enableColoredGlint)
+        {
+            return -8372020;
+        }
+        
         int alpha = 0x66000000;
         
         // Sword enchantments

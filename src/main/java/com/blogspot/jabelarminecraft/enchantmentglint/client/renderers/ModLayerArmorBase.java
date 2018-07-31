@@ -3,6 +3,7 @@ package com.blogspot.jabelarminecraft.enchantmentglint.client.renderers;
 import java.util.Map;
 
 import com.blogspot.jabelarminecraft.enchantmentglint.MainMod;
+import com.blogspot.jabelarminecraft.enchantmentglint.init.ModConfig;
 import com.blogspot.jabelarminecraft.enchantmentglint.proxy.ClientProxy;
 import com.google.common.collect.Maps;
 
@@ -23,7 +24,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public abstract class ModLayerArmorBase<T extends ModelBase> implements LayerRenderer<EntityLivingBase>
 {
-    protected static final ResourceLocation ENCHANTED_ITEM_GLINT_RES = new ResourceLocation(MainMod.MODID, "textures/misc/enchanted_item_glint.png");
+    protected static final ResourceLocation RES_ITEM_GLINT_RUNE = new ResourceLocation(MainMod.MODID, "textures/misc/enchanted_item_glint_rune.png");
+    protected static final ResourceLocation RES_ITEM_GLINT = new ResourceLocation(MainMod.MODID, "textures/misc/enchanted_item_glint.png");
     protected T modelLeggings;
     protected T modelArmor;
     private final RenderLivingBase<?> renderer;
@@ -109,7 +111,15 @@ public abstract class ModLayerArmorBase<T extends ModelBase> implements LayerRen
     public static void renderEnchantedGlint(RenderLivingBase<?> parRenderLivingBase, EntityLivingBase parEntityLivingBase, ModelBase model, float parLimbSwing, float parLimbSwingAmount, float parPartialTicks, float parAgeInTicks, float parHeadYaw, float parHeadPitch, float parScale, int parColor)
     {
         float f = parEntityLivingBase.ticksExisted + parPartialTicks;
-        parRenderLivingBase.bindTexture(ENCHANTED_ITEM_GLINT_RES);
+        if (ModConfig.useRuneTexture) 
+        {
+            parRenderLivingBase.bindTexture(RES_ITEM_GLINT_RUNE);
+        }
+        else
+        {
+            parRenderLivingBase.bindTexture(RES_ITEM_GLINT);
+        }
+
         Minecraft.getMinecraft().entityRenderer.setupFogColor(true);
         GlStateManager.enableBlend();
         GlStateManager.depthFunc(514);
