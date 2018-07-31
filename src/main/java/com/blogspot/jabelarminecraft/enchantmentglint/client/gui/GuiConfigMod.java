@@ -59,7 +59,7 @@ public class GuiConfigMod extends GuiConfig
                 MainMod.MODID,
                 false,
                 false,
-                Utilities.stringToGolden("Craft The Way You Want", 7));
+                Utilities.stringToGolden(I18n.format("mod_motto"), 7));
         titleLine2 = ModConfig.configFile.getAbsolutePath();
     }
 
@@ -71,7 +71,7 @@ public class GuiConfigMod extends GuiConfig
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
-        title = Utilities.stringToGolden("Craft The Way You Want", 7);
+        title = Utilities.stringToRainbow(I18n.format("mod_motto"));
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 
@@ -85,16 +85,12 @@ public class GuiConfigMod extends GuiConfig
     {
         if (button.id == 2000)
         {
-            // DEBUG
-            System.out.println("Pressed DONE button");
             boolean flag = true;
             try
             {
                 if ((configID != null || this.parentScreen == null || !(this.parentScreen instanceof GuiConfigMod))
                         && (this.entryList.hasChangedEntry(true)))
                 {
-                    // DEBUG
-                    System.out.println("Saving config elements");
                     boolean requiresMcRestart = this.entryList.saveConfigElements();
 
                     if (Loader.isModLoaded(modID))

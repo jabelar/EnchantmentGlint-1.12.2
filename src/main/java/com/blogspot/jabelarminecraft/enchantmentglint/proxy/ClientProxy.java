@@ -17,12 +17,9 @@
 package com.blogspot.jabelarminecraft.enchantmentglint.proxy;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-import java.util.List;
 import java.util.Map;
 
 import com.blogspot.jabelarminecraft.enchantmentglint.MainMod;
-import com.blogspot.jabelarminecraft.enchantmentglint.client.localization.ModLocale;
 import com.blogspot.jabelarminecraft.enchantmentglint.client.renderers.ModRenderArmorStand;
 import com.blogspot.jabelarminecraft.enchantmentglint.client.renderers.ModRenderGiantZombie;
 import com.blogspot.jabelarminecraft.enchantmentglint.client.renderers.ModRenderHusk;
@@ -34,7 +31,6 @@ import com.blogspot.jabelarminecraft.enchantmentglint.client.renderers.ModRender
 import com.blogspot.jabelarminecraft.enchantmentglint.client.renderers.ModRenderWitherSkeleton;
 import com.blogspot.jabelarminecraft.enchantmentglint.client.renderers.ModRenderZombie;
 import com.blogspot.jabelarminecraft.enchantmentglint.client.renderers.ModRenderZombieVillager;
-import com.google.common.collect.Lists;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemRenderer;
@@ -43,7 +39,6 @@ import net.minecraft.client.renderer.block.model.ModelManager;
 import net.minecraft.client.renderer.entity.RenderEntityItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderPlayer;
-import net.minecraft.client.resources.LanguageManager;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.item.EntityArmorStand;
 import net.minecraft.entity.item.EntityItem;
@@ -55,15 +50,9 @@ import net.minecraft.entity.monster.EntityStray;
 import net.minecraft.entity.monster.EntityWitherSkeleton;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.monster.EntityZombieVillager;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Enchantments;
-import net.minecraft.util.text.translation.LanguageMap;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 
@@ -78,76 +67,23 @@ public class ClientProxy implements IProxy
     public static Field itemRenderer = ReflectionHelper.findField(ItemRenderer.class, "itemRenderer", "itemRenderer");
     public static Field playerRenderer = ReflectionHelper.findField(RenderManager.class, "playerRender", "playerRenderer");
     public static Field skinMap = ReflectionHelper.findField(RenderManager.class, "skinMap", "skinMap");
-    
-    public static Field locale = ReflectionHelper.findField(LanguageManager.class, "CURRENT_LOCALE", "CURRENT_LOCALE");
-    public static ModLocale MOD_LOCALE = new ModLocale();
 
-    /* (non-Javadoc)
-     * @see com.blogspot.jabelarminecraft.examplemod.proxy.IProxy#preInit(net.minecraftforge.fml.common.event.FMLPreInitializationEvent)
-     */
-    @Override
-    public void preInit(FMLPreInitializationEvent event)
-    {
-        // DEBUG
-        System.out.println("on Client side");
-        
-        fixLocaleClass();
-    }
-    
-    /**
-     * Fix locale class.
-     */
-    public void fixLocaleClass()
-    {
-        // DEBUG
-        System.out.println("Swapping in custom locale class");
-        Field modifiersField;
-        try
-        {
-            modifiersField = Field.class.getDeclaredField("modifiers");
-            modifiersField.setAccessible(true);
-            try
-            {
-                modifiersField.setInt(locale, locale.getModifiers() & ~Modifier.FINAL);
-            }
-            catch (IllegalArgumentException | IllegalAccessException e)
-            {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-        catch (NoSuchFieldException | SecurityException e1)
-        {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-        }
-
-        try
-        {
-            locale.set(null, MOD_LOCALE);
-        }
-        catch (IllegalArgumentException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        catch (IllegalAccessException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
 
     /* (non-Javadoc)
      * @see com.blogspot.jabelarminecraft.examplemod.proxy.IProxy#init(net.minecraftforge.fml.common.event.FMLInitializationEvent)
      */
-    @SuppressWarnings("unchecked")
     @Override
     public void init(FMLInitializationEvent event)
     {
         // DEBUG
         System.out.println("on Client side");
         
+        replaceRenderers();       
+    }
+    
+    @SuppressWarnings("unchecked")
+    public void replaceRenderers()
+    {
         Minecraft mc = Minecraft.getMinecraft();
         
         // Replace render item with custom version
@@ -184,64 +120,7 @@ public class ClientProxy implements IProxy
         mc.getRenderManager().entityRenderMap.put(EntityPigZombie.class, new ModRenderPigZombie(mc.getRenderManager()));
         mc.getRenderManager().entityRenderMap.put(EntityArmorStand.class, new ModRenderArmorStand(mc.getRenderManager()));
     }
-
-    /* (non-Javadoc)
-     * @see com.blogspot.jabelarminecraft.examplemod.proxy.IProxy#postInit(net.minecraftforge.fml.common.event.FMLPostInitializationEvent)
-     */
-    @Override
-    public void postInit(FMLPostInitializationEvent event)
-    {
-        // DEBUG
-        System.out.println("on Client side");
-
-        refreshLangResources();
-    }
-
-    /**
-     * Refresh lang resources.
-     */
-    @SuppressWarnings("unlikely-arg-type")
-    public void refreshLangResources()
-    {
-        // DEBUG
-        System.out.println("Refreshing lang files with proper precedence");
-//        Minecraft.getMinecraft().refreshResources();
-        List<String> list = Lists.newArrayList("en_us");
-
-        if (!"en_us".equals(Minecraft.getMinecraft().getLanguageManager().getCurrentLanguage()))
-        {
-            list.add(Minecraft.getMinecraft().getLanguageManager().getCurrentLanguage().toString());
-        }
-
-        // This is a fix for problem where lang files are not properly replaced by resource packs
-        MOD_LOCALE.loadLocaleDataFiles(Minecraft.getMinecraft().getResourceManager(), list);
-        LanguageMap.replaceWith(MOD_LOCALE.properties);
-    }
-
-    /* (non-Javadoc)
-     * @see com.blogspot.jabelarminecraft.examplemod.proxy.IProxy#getPlayerEntityFromContext(net.minecraftforge.fml.common.network.simpleimpl.MessageContext)
-     */
-    @Override
-    public EntityPlayer getPlayerEntityFromContext(MessageContext ctx)
-    {
-        // Note that if you simply return 'Minecraft.getMinecraft().thePlayer',
-        // your packets will not work because you will be getting a client
-        // player even when you are on the server! Sounds absurd, but it's true.
-
-        // Solution is to double-check side before returning the player:
-        return (ctx.side.isClient() ? Minecraft.getMinecraft().player : ctx.getServerHandler().player);
-    }
-
-
-    /* (non-Javadoc)
-     * @see com.blogspot.jabelarminecraft.examplemod.proxy.IProxy#serverStarting(net.minecraftforge.fml.common.event.FMLServerStartingEvent)
-     */
-    @Override
-    public void serverStarting(FMLServerStartingEvent event)
-    {
-        // This will never get called on client side
-    }
-        
+     
     public static int getColorForEnchantment(Map<Enchantment, Integer> enchMap)
     {
         int alpha = 0x66000000;

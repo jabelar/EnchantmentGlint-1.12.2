@@ -20,17 +20,13 @@ import com.blogspot.jabelarminecraft.enchantmentglint.init.ModConfig;
 import com.blogspot.jabelarminecraft.enchantmentglint.proxy.IProxy;
 import com.blogspot.jabelarminecraft.enchantmentglint.utilities.Utilities;
 
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
-// TODO: Auto-generated Javadoc
 /**
  * This is the main file for the mod, as it has the mod annotation
  */
@@ -53,11 +49,6 @@ public class MainMod
     public static final String MODCREDITS = "Jnaejnae";
     public static final String MODURL = "www.jabelarminecraft.blogspot.com";
     public static final String MODLOGO = "modconfigraphic.png";
-
-    static
-    {
-        FluidRegistry.enableUniversalBucket();
-    }
 
     // instantiate the mod
     @Instance(MODID)
@@ -84,8 +75,6 @@ public class MainMod
         Utilities.setModInfo(event);
         ModConfig.initConfig(event); // load configuration before doing anything else that may be controlled by it.
         // register stuff
-
-        proxy.preInit(event);
     }
 
     /**
@@ -103,36 +92,5 @@ public class MainMod
         System.out.println("init()");
                 
         proxy.init(event);
-    }
-
-    /**
-     * Post-Initialization FML Life Cycle event handling method which is automatically
-     * called by Forge. It must be annotated as an event handler.
-     *
-     * @param event the event
-     */
-    @EventHandler
-    // postInit "Handle interaction with other mods, complete your setup based on this."
-    public void postInit(FMLPostInitializationEvent event)
-    {
-        // DEBUG
-        System.out.println("postInit()");
-
-        proxy.postInit(event);
-    }
-
-
-    /**
-     * Fml life cycle.
-     *
-     * @param event the event
-     */
-    @EventHandler
-    public void serverStarting(FMLServerStartingEvent event)
-    {
-        // DEBUG
-        System.out.println("Server starting");
-
-        proxy.serverStarting(event);
     }
 }

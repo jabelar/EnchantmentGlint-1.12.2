@@ -17,20 +17,12 @@
 package com.blogspot.jabelarminecraft.enchantmentglint;
 
 import com.blogspot.jabelarminecraft.enchantmentglint.init.ModConfig;
-import com.blogspot.jabelarminecraft.enchantmentglint.init.ModEnchantments;
 
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-// TODO: Auto-generated Javadoc
 /**
  * This class contains many of the event handling methods for events posted to the event bus.
  * Registry events are contained in separate classes in the init subpackage. It is important that
@@ -55,36 +47,6 @@ public class EventHandler
             System.out.println("Syncing config for mod =" + event.getModID());
             ModConfig.config.save();
             ModConfig.syncConfig();
-        }
-    }
-        
-    /**
- * On event.
- *
- * @param event the event
- */
-@SubscribeEvent(priority = EventPriority.NORMAL, receiveCanceled = true)
-    public static void onEvent(LivingFallEvent event)
-    {
-        if (event.getEntityLiving() instanceof EntityPlayer)
-        {
-            for (ItemStack stack : event.getEntityLiving().getArmorInventoryList())
-            {
-                NBTTagList tagList = stack.getEnchantmentTagList();
-                
-                for (int i = 0; i < tagList.tagCount(); i++)
-                {
-                    NBTTagCompound idTag = tagList.getCompoundTagAt(i);
-                    
-                    if (idTag.getShort("id") == Enchantment.getEnchantmentID(ModEnchantments.safe_falling))
-                    {
-//                        // DEBUG
-//                        System.out.println("Boots of safe falling cushioned fall");
-                        event.setDistance(0);
-                        event.setDamageMultiplier(0);
-                    }
-                }
-            }
         }
     }
 }
