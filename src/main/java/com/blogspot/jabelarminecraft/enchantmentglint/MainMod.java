@@ -39,6 +39,8 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
         version = MainMod.MODVERSION,
         guiFactory = "com.blogspot.jabelarminecraft." + MainMod.MODID + ".client.gui.GuiFactory",
         acceptedMinecraftVersions = "[1.12]",
+        acceptableRemoteVersions = "*",
+        clientSideOnly = true,
         updateJSON = "https://raw.githubusercontent.com/jabelar/ExampleMod-1.12/master/src/main/resources/versionChecker.json"
         )
 public class MainMod
