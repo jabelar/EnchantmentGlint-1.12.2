@@ -23,8 +23,5 @@ public class ModRenderArmorStand extends RenderArmorStand
             }
         };
         addLayer(layerbipedarmor);
-        // DEBUG
-        System.out.println("ModRenderArmorStand layerRenderers = "+layerRenderers);
     }
-
 }

@@ -13,8 +13,6 @@ public class ModRenderStray extends ModRenderSkeleton
     {
         super(manager);
         addLayer(new LayerStrayClothing(this));
-        // DEBUG
-        System.out.println("ModRenderStray layerRenderers = "+layerRenderers);
     }
 
     /**

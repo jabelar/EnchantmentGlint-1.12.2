@@ -12,9 +12,6 @@ public class ModLayerBipedArmor extends ModLayerArmorBase<ModelBiped>
     public ModLayerBipedArmor(RenderLivingBase<?> rendererIn)
     {
         super(rendererIn);
-        
-        // DEBUG
-        System.out.println("Replacing LayerBipedArmor to custom version");
     }
 
     @Override
@@ -26,29 +23,29 @@ public class ModLayerBipedArmor extends ModLayerArmorBase<ModelBiped>
 
     @Override
     @SuppressWarnings("incomplete-switch")
-    protected void setModelSlotVisible(ModelBiped p_188359_1_, EntityEquipmentSlot slotIn)
+    protected void setModelSlotVisible(ModelBiped modelIn, EntityEquipmentSlot slotIn)
     {
-        this.setModelVisible(p_188359_1_);
+        this.setModelVisible(modelIn);
 
         switch (slotIn)
         {
             case HEAD:
-                p_188359_1_.bipedHead.showModel = true;
-                p_188359_1_.bipedHeadwear.showModel = true;
+                modelIn.bipedHead.showModel = true;
+                modelIn.bipedHeadwear.showModel = true;
                 break;
             case CHEST:
-                p_188359_1_.bipedBody.showModel = true;
-                p_188359_1_.bipedRightArm.showModel = true;
-                p_188359_1_.bipedLeftArm.showModel = true;
+                modelIn.bipedBody.showModel = true;
+                modelIn.bipedRightArm.showModel = true;
+                modelIn.bipedLeftArm.showModel = true;
                 break;
             case LEGS:
-                p_188359_1_.bipedBody.showModel = true;
-                p_188359_1_.bipedRightLeg.showModel = true;
-                p_188359_1_.bipedLeftLeg.showModel = true;
+                modelIn.bipedBody.showModel = true;
+                modelIn.bipedRightLeg.showModel = true;
+                modelIn.bipedLeftLeg.showModel = true;
                 break;
             case FEET:
-                p_188359_1_.bipedRightLeg.showModel = true;
-                p_188359_1_.bipedLeftLeg.showModel = true;
+                modelIn.bipedRightLeg.showModel = true;
+                modelIn.bipedLeftLeg.showModel = true;
         }
     }
 

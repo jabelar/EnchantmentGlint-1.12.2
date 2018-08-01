@@ -17,14 +17,8 @@ public class ModRenderPlayer extends RenderPlayer
     public ModRenderPlayer(RenderManager renderManager, boolean b)
     {
         super(renderManager, b);
-        
-        // DEBUG
-        System.out.println("Replacing RenderPlayer with custom version, skinny version = : "+b);
-        
+                
         layerRenderers.remove(0);
         addLayer(new ModLayerBipedArmor(this));
-        // DEBUG
-        System.out.println("ModRenderPlayer layerRenderers = "+layerRenderers);
    }
-
 }

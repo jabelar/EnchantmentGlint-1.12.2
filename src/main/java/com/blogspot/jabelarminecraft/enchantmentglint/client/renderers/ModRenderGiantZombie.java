@@ -24,8 +24,5 @@ public class ModRenderGiantZombie extends RenderGiantZombie
         };
         layerRenderers.remove(1);
         addLayer(layerbipedarmor);
-        // DEBUG
-        System.out.println("ModRenderGiantZombie layerRenderers = "+layerRenderers);
     }
-
 }

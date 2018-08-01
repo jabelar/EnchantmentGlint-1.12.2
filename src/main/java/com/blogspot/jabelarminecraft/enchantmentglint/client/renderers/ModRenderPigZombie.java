@@ -24,7 +24,5 @@ public class ModRenderPigZombie extends RenderPigZombie
                 modelArmor = new ModelZombie(1.0F, true);
             }
         });
-        // DEBUG
-        System.out.println("ModRenderPigZombie layerRenderers = "+layerRenderers);
     }
 }

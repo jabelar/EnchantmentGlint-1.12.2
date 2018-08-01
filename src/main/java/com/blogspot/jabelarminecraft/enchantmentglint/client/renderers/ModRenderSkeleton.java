@@ -24,7 +24,5 @@ public class ModRenderSkeleton extends RenderSkeleton
                 modelArmor = new ModelSkeleton(1.0F, true);
             }
         });
-         // DEBUG
-        System.out.println("ModRenderSkeleton layerRenderers = "+layerRenderers);
    }
 }

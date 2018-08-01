@@ -12,8 +12,6 @@ public class ModRenderWitherSkeleton extends ModRenderSkeleton
     public ModRenderWitherSkeleton(RenderManager manager)
     {
         super(manager);
-        // DEBUG
-        System.out.println("ModRenderWitherSkeleton layerRenderers = "+layerRenderers);
     }
 
     /**

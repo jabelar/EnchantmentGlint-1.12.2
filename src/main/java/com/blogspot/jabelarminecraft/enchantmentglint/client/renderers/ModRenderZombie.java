@@ -9,7 +9,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class ModRenderZombie extends RenderZombie
 {
-
     public ModRenderZombie(RenderManager renderManagerIn)
     {
         super(renderManagerIn);
@@ -25,7 +24,5 @@ public class ModRenderZombie extends RenderZombie
             }
         };
         addLayer(layerbipedarmor);
-        // DEBUG
-        System.out.println("ModRenderZombie layerRenderers = "+layerRenderers);
     }
 }

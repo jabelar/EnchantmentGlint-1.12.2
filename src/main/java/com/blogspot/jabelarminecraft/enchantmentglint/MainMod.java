@@ -69,12 +69,8 @@ public class MainMod
     // preInit "Run before anything else. Read your config, create blocks, items, etc, and register them with the GameRegistry."
     public void preInit(FMLPreInitializationEvent event)
     {
-        // DEBUG
-        System.out.println("preInit() " + event.getModMetadata().name);
-
         Utilities.setModInfo(event);
         ModConfig.initConfig(event); // load configuration before doing anything else that may be controlled by it.
-        // register stuff
     }
 
     /**
@@ -88,9 +84,7 @@ public class MainMod
     // Register network handlers
     public void init(FMLInitializationEvent event)
     {
-        // DEBUG
-        System.out.println("init()");
-                
+
         proxy.init(event);
     }
 }

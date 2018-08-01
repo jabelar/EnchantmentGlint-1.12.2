@@ -9,7 +9,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class ModRenderZombieVillager extends RenderZombieVillager
 {
-
     public ModRenderZombieVillager(RenderManager manager)
     {
         super(manager);
@@ -24,7 +23,5 @@ public class ModRenderZombieVillager extends RenderZombieVillager
         };
         layerRenderers.remove(3);
         addLayer(layerbipedarmor);
-        // DEBUG
-        System.out.println("ModRenderZombieVillager layerRenderers = "+layerRenderers);
     }
 }
