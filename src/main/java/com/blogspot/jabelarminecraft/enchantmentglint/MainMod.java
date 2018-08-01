@@ -47,7 +47,7 @@ public class MainMod
     public static final String MODDESCRIPTION = "Control the colors of your enchantments.";
     public static final String MODAUTHOR = "jabelar";
     public static final String MODCREDITS = "Jnaejnae";
-    public static final String MODURL = "www.jabelarminecraft.blogspot.com";
+    public static final String MODURL = "http://jabelarminecraftmods.blogspot.com/";
     public static final String MODLOGO = "modconfigraphic.png";
 
     // instantiate the mod
