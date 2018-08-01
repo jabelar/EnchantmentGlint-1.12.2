@@ -76,9 +76,6 @@ public class ClientProxy implements IProxy
     @Override
     public void init(FMLInitializationEvent event)
     {
-        // DEBUG
-        System.out.println("on Client side");
-        
         replaceRenderers();       
     }
     
@@ -96,17 +93,12 @@ public class ClientProxy implements IProxy
             modRenderItem = new ModRenderItem(mc.getTextureManager(), (ModelManager) modelManager.get(mc), mc.getItemColors(), ((RenderItem)renderItem.get(mc)).getItemModelMesher());
             renderItem.set(mc, modRenderItem);
             itemRenderer.set(mc.getItemRenderer(), modRenderItem);
-            // DEBUG
-            System.out.println("playerRenderer before reflection is "+playerRenderer.get(mc.getRenderManager()));
             playerRenderer.set(mc.getRenderManager(), new ModRenderPlayer(mc.getRenderManager()));
-            // DEBUG
-            System.out.println("playerRenderer after reflection is "+playerRenderer.get(mc.getRenderManager()));
             ((Map<String, RenderPlayer>)skinMap.get(mc.getRenderManager())).put("default", new ModRenderPlayer(mc.getRenderManager()));
             ((Map<String, RenderPlayer>)skinMap.get(mc.getRenderManager())).put("slim", new ModRenderPlayer(mc.getRenderManager(), true));
         }
         catch (IllegalArgumentException | IllegalAccessException e)
         {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         

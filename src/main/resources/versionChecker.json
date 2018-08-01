@@ -7,6 +7,6 @@
   },
   "1.12.2": 
   {
-    "1.0.0": "jabelar: Initial release showcasing block, item and entity registration, event handling, custom fluids and such." 
+    "1.0.0": "jabelar: Inital release." 
   }
 }
