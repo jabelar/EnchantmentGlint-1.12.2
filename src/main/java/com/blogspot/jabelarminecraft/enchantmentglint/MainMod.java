@@ -48,7 +48,7 @@ public class MainMod
     public static final String MODAUTHOR = "jabelar";
     public static final String MODCREDITS = "Jnaejnae";
     public static final String MODURL = "http://jabelarminecraftmods.blogspot.com/";
-    public static final String MODLOGO = "modconfigraphic.png";
+    public static final String MODLOGO = "assets/enchantmentglint/textures/modconfiggraphic.png";
 
     // instantiate the mod
     @Instance(MODID)

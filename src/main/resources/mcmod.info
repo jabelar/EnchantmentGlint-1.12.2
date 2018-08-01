@@ -9,7 +9,7 @@
   "updateUrl": "",
   "authorList": ["jabelar"],
   "credits": "Jnaejnae",
-  "logoFile": "modconfiggraphic.png",
+  "logoFile": "assets/enchantmentglint/textures/modconfiggraphic.png",
   "screenshots": [],
   "dependencies": []
 }
