@@ -63,11 +63,11 @@ import net.minecraftforge.fml.relauncher.Side;
 public class ClientProxy implements IProxy
 {
     public static ModRenderItem modRenderItem; // used to provide custom enchantment glint color
-    public static Field modelManager = ReflectionHelper.findField(Minecraft.class, "modelManager", "modelManager");
-    public static Field renderItem = ReflectionHelper.findField(Minecraft.class, "renderItem", "renderItem");
-    public static Field itemRenderer = ReflectionHelper.findField(ItemRenderer.class, "itemRenderer", "itemRenderer");
-    public static Field playerRenderer = ReflectionHelper.findField(RenderManager.class, "playerRender", "playerRenderer");
-    public static Field skinMap = ReflectionHelper.findField(RenderManager.class, "skinMap", "skinMap");
+    public static Field modelManager = ReflectionHelper.findField(Minecraft.class, "modelManager", "field_175617_aL");
+    public static Field renderItem = ReflectionHelper.findField(Minecraft.class, "renderItem", "field_175621_X");
+    public static Field itemRenderer = ReflectionHelper.findField(ItemRenderer.class, "itemRenderer", "field_178112_h");
+    public static Field playerRenderer = ReflectionHelper.findField(RenderManager.class, "playerRenderer", "field_178637_m");
+    public static Field skinMap = ReflectionHelper.findField(RenderManager.class, "skinMap", "field_178636_l");
 
 
     /* (non-Javadoc)
