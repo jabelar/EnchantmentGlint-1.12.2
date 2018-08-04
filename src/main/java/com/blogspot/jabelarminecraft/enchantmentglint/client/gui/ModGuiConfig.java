@@ -47,7 +47,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 // TODO: Auto-generated Javadoc
 @SideOnly(Side.CLIENT)
-public class GuiConfigMod extends GuiConfig
+public class ModGuiConfig extends GuiConfig
 {
 
     /**
@@ -56,7 +56,7 @@ public class GuiConfigMod extends GuiConfig
      * @param parent
      *            the parent
      */
-    public GuiConfigMod(GuiScreen parent)
+    public ModGuiConfig(GuiScreen parent)
     {  
         super(parent, 
                 Stream.of(
@@ -78,18 +78,6 @@ public class GuiConfigMod extends GuiConfig
     /*
      * (non-Javadoc)
      * 
-     * @see net.minecraftforge.fml.client.config.GuiConfig#drawScreen(int, int, float)
-     */
-    @Override
-    public void drawScreen(int mouseX, int mouseY, float partialTicks)
-    {
-        title = Utilities.stringToRainbow(I18n.format("mod_motto"));
-        super.drawScreen(mouseX, mouseY, partialTicks);
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
      * @see net.minecraftforge.fml.client.config.GuiConfig#actionPerformed(net.minecraft.client.gui.GuiButton)
      */
     @Override
@@ -100,7 +88,7 @@ public class GuiConfigMod extends GuiConfig
             boolean flag = true;
             try
             {
-                if ((configID != null || this.parentScreen == null || !(this.parentScreen instanceof GuiConfigMod))
+                if ((configID != null || this.parentScreen == null || !(this.parentScreen instanceof ModGuiConfig))
                         && (this.entryList.hasChangedEntry(true)))
                 {
                     boolean requiresMcRestart = this.entryList.saveConfigElements();
@@ -119,8 +107,8 @@ public class GuiConfigMod extends GuiConfig
                                     new TextComponentString(I18n.format("fml.configgui.gameRestartRequired")), "fml.configgui.confirmRestartMessage"));
                         }
 
-                        if (this.parentScreen instanceof GuiConfigMod)
-                            ((GuiConfigMod) this.parentScreen).needsRefresh = true;
+                        if (this.parentScreen instanceof ModGuiConfig)
+                            ((ModGuiConfig) this.parentScreen).needsRefresh = true;
                     }
                 }
             }

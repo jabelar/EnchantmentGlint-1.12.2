@@ -67,6 +67,6 @@ public class GuiFactory implements IModGuiFactory
     @Override
     public GuiScreen createConfigGui(GuiScreen parentScreen)
     {
-        return new GuiConfigMod(parentScreen);
+        return new ModGuiConfig(parentScreen);
     }
 }
