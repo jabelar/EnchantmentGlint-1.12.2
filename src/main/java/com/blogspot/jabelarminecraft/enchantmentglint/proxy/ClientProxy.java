@@ -124,46 +124,46 @@ public class ClientProxy implements IProxy
         int alpha = 0x66000000;
         
         // Sword enchantments
-        if (enchMap.containsKey(Enchantments.BANE_OF_ARTHROPODS)) return alpha | 0xcc00ff;
-        if (enchMap.containsKey(Enchantments.FIRE_ASPECT)) return alpha | 0xff4000;
-        if (enchMap.containsKey(Enchantments.KNOCKBACK)) return alpha | 0x6600ff;
-        if (enchMap.containsKey(Enchantments.LOOTING)) return alpha | 0xffe066;
-        if (enchMap.containsKey(Enchantments.SHARPNESS)) return alpha | 0xff9933;
-        if (enchMap.containsKey(Enchantments.SMITE)) return alpha | 0x00ccff;
-        if (enchMap.containsKey(Enchantments.SWEEPING)) return alpha | 0xccff33;
-        if (enchMap.containsKey(Enchantments.UNBREAKING)) return alpha | 0x00cc66;
+        if (enchMap.containsKey(Enchantments.BANE_OF_ARTHROPODS)) return alpha | ModConfig.BANE_OF_ARTHROPODS;
+        if (enchMap.containsKey(Enchantments.FIRE_ASPECT)) return alpha | ModConfig.FIRE_ASPECT;
+        if (enchMap.containsKey(Enchantments.KNOCKBACK)) return alpha | ModConfig.KNOCKBACK;
+        if (enchMap.containsKey(Enchantments.LOOTING)) return alpha | ModConfig.LOOTING;
+        if (enchMap.containsKey(Enchantments.SHARPNESS)) return alpha | ModConfig.SHARPNESS;
+        if (enchMap.containsKey(Enchantments.SMITE)) return alpha | ModConfig.SMITE;
+        if (enchMap.containsKey(Enchantments.SWEEPING)) return alpha | ModConfig.SWEEPING;
+        if (enchMap.containsKey(Enchantments.UNBREAKING)) return alpha | ModConfig.UNBREAKING;
 
         // Bow enchantments
-        if (enchMap.containsKey(Enchantments.FLAME)) return alpha | 0xff4000;
-        if (enchMap.containsKey(Enchantments.INFINITY)) return alpha | 0xcc00ff;
-        if (enchMap.containsKey(Enchantments.POWER)) return alpha | 0xff9933;
-        if (enchMap.containsKey(Enchantments.PUNCH)) return alpha | 0x6600ff;
+        if (enchMap.containsKey(Enchantments.FLAME)) return alpha | ModConfig.FLAME;
+        if (enchMap.containsKey(Enchantments.INFINITY)) return alpha | ModConfig.INFINITY;
+        if (enchMap.containsKey(Enchantments.POWER)) return alpha | ModConfig.POWER;
+        if (enchMap.containsKey(Enchantments.PUNCH)) return alpha | ModConfig.PUNCH;
 
         // Tool enchantments
-        if (enchMap.containsKey(Enchantments.EFFICIENCY)) return alpha | 0x33ccff;
-        if (enchMap.containsKey(Enchantments.FORTUNE)) return alpha | 0xffe066;
-        if (enchMap.containsKey(Enchantments.SILK_TOUCH)) return alpha | 0xccff99;
+        if (enchMap.containsKey(Enchantments.EFFICIENCY)) return alpha | ModConfig.EFFICIENCY;
+        if (enchMap.containsKey(Enchantments.FORTUNE)) return alpha | ModConfig.FORTUNE;
+        if (enchMap.containsKey(Enchantments.SILK_TOUCH)) return alpha | ModConfig.SILK_TOUCH;
 
         // Fishing rod enchantments
-        if (enchMap.containsKey(Enchantments.LUCK_OF_THE_SEA)) return alpha | 0xffe066;
-        if (enchMap.containsKey(Enchantments.LURE)) return alpha | 0x33ccff;
+        if (enchMap.containsKey(Enchantments.LUCK_OF_THE_SEA)) return alpha | ModConfig.LUCK_OF_THE_SEA;
+        if (enchMap.containsKey(Enchantments.LURE)) return alpha | ModConfig.LURE;
 
         // Armor enchantments
-        if (enchMap.containsKey(Enchantments.AQUA_AFFINITY)) return alpha | 0x3366ff;
-        if (enchMap.containsKey(Enchantments.BLAST_PROTECTION)) return alpha | 0xcc6699;
-        if (enchMap.containsKey(Enchantments.DEPTH_STRIDER)) return alpha | 0x6666ff;
-        if (enchMap.containsKey(Enchantments.FEATHER_FALLING)) return alpha | 0xccff99;
-        if (enchMap.containsKey(Enchantments.FIRE_PROTECTION)) return alpha | 0xff4000;
-        if (enchMap.containsKey(Enchantments.FROST_WALKER)) return alpha | 0xccffff;
-        if (enchMap.containsKey(Enchantments.MENDING)) return alpha | 0xffe066;
-        if (enchMap.containsKey(Enchantments.PROJECTILE_PROTECTION)) return alpha | 0xcc99ff;
-        if (enchMap.containsKey(Enchantments.PROTECTION)) return alpha | 0x00cc99;
-        if (enchMap.containsKey(Enchantments.RESPIRATION)) return alpha | 0x3366ff;
-        if (enchMap.containsKey(Enchantments.THORNS)) return alpha | 0xff9933;
+        if (enchMap.containsKey(Enchantments.AQUA_AFFINITY)) return alpha | ModConfig.AQUA_AFFINITY;
+        if (enchMap.containsKey(Enchantments.BLAST_PROTECTION)) return alpha | ModConfig.BLAST_PROTECTION;
+        if (enchMap.containsKey(Enchantments.DEPTH_STRIDER)) return alpha | ModConfig.DEPTH_STRIDER;
+        if (enchMap.containsKey(Enchantments.FEATHER_FALLING)) return alpha | ModConfig.FEATHER_FALLING;
+        if (enchMap.containsKey(Enchantments.FIRE_PROTECTION)) return alpha | ModConfig.FIRE_PROTECTION;
+        if (enchMap.containsKey(Enchantments.FROST_WALKER)) return alpha | ModConfig.FROST_WALKER;
+        if (enchMap.containsKey(Enchantments.MENDING)) return alpha | ModConfig.MENDING;
+        if (enchMap.containsKey(Enchantments.PROJECTILE_PROTECTION)) return alpha | ModConfig.PROJECTILE_PROTECTION;
+        if (enchMap.containsKey(Enchantments.PROTECTION)) return alpha | ModConfig.PROTECTION;
+        if (enchMap.containsKey(Enchantments.RESPIRATION)) return alpha | ModConfig.RESPIRATION;
+        if (enchMap.containsKey(Enchantments.THORNS)) return alpha | ModConfig.THORNS;
 
         // Curses
-        if (enchMap.containsKey(Enchantments.VANISHING_CURSE)) return alpha | 0x6600cc;
-        if (enchMap.containsKey(Enchantments.BINDING_CURSE)) return alpha | 0xffffff;
+        if (enchMap.containsKey(Enchantments.VANISHING_CURSE)) return alpha | ModConfig.VANISHING_CURSE;
+        if (enchMap.containsKey(Enchantments.BINDING_CURSE)) return alpha | ModConfig.BINDING_CURSE;
         
         return -8372020;
     }
