@@ -73,11 +73,12 @@ public class ModGuiConfig extends GuiConfig
     {
         List<IConfigElement> list = new ArrayList<IConfigElement>();
         list.addAll(new ConfigElement(ModConfig.config.getCategory(Configuration.CATEGORY_GENERAL)).getChildElements());
-        list.add(new DummyCategoryElement("armor", "Armor Enchantments", new ConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_ARMOR)).getChildElements()));
-        list.add(new DummyCategoryElement("bow", "Bow Enchantments", new ConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_BOW)).getChildElements()));
-        list.add(new DummyCategoryElement("sword", "Sword Enchantments", new ConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_SWORD)).getChildElements()));
-        list.add(new DummyCategoryElement("tool", "Tool Enchantments", new ConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_TOOL)).getChildElements()));
-        list.add(new DummyCategoryElement("curse", "Curses", new ConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_CURSE)).getChildElements()));
+        list.add(new DummyCategoryElement("armor", "config.category.armor", new ConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_ARMOR)).getChildElements()));
+        list.add(new DummyCategoryElement("bow", "config.category.bow", new ConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_BOW)).getChildElements()));
+        list.add(new DummyCategoryElement("sword", "config.category.sword", new ConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_SWORD)).getChildElements()));
+        list.add(new DummyCategoryElement("tool", "config.category.tool", new ConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_TOOL)).getChildElements()));
+        list.add(new DummyCategoryElement("fishing", "config.category.fishing", new ConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_FISHING)).getChildElements()));
+        list.add(new DummyCategoryElement("curse", "config.category.curse", new ConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_CURSE)).getChildElements()));
         return list;
 //        return Stream.of(
 //                new ConfigElement(ModConfig.config.getCategory(Configuration.CATEGORY_GENERAL)).getChildElements(), 
