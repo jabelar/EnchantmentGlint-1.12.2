@@ -123,46 +123,46 @@ public class ModConfig
         // Sword enchantments
         BANE_OF_ARTHROPODS = config.get(CATEGORY_SWORD, I18n.format("enchantment.damage.arthropods"), 0xcc00ff).getInt(0xcc00ff);
         FIRE_ASPECT = config.get(CATEGORY_SWORD, I18n.format("enchantment.fire"),0xff4000).getInt(0xff4000);
-        KNOCKBACK = config.get(CATEGORY_SWORD, I18n.format(""), 0x6600ff).getInt(0x6600ff);
-        LOOTING = config.get(CATEGORY_SWORD, I18n.format(""), 0xffe066).getInt(0xffe066);
-        SHARPNESS = config.get(CATEGORY_SWORD, I18n.format(""), 0xff9933).getInt(0xff9933);
-        SMITE = config.get(CATEGORY_SWORD, I18n.format(""), 0x00ccff).getInt(0x00ccff);
-        SWEEPING = config.get(CATEGORY_SWORD, I18n.format(""), 0xccff33).getInt(0xccff33);
-        UNBREAKING = config.get(CATEGORY_SWORD, I18n.format(""), 0x00cc66).getInt(0x00cc66);
+        KNOCKBACK = config.get(CATEGORY_SWORD, I18n.format("enchantment.knockback"), 0x6600ff).getInt(0x6600ff);
+        LOOTING = config.get(CATEGORY_SWORD, I18n.format("enchantment.lootBonus"), 0xffe066).getInt(0xffe066);
+        SHARPNESS = config.get(CATEGORY_SWORD, I18n.format("enchantment.damage.all"), 0xff9933).getInt(0xff9933);
+        SMITE = config.get(CATEGORY_SWORD, I18n.format("enchantment.damage.undead"), 0x00ccff).getInt(0x00ccff);
+        SWEEPING = config.get(CATEGORY_SWORD, I18n.format("enchantment.sweeping"), 0xccff33).getInt(0xccff33);
+        UNBREAKING = config.get(CATEGORY_SWORD, I18n.format("enchantment.durability"), 0x00cc66).getInt(0x00cc66);
 
         // Bow enchantments
-        FLAME = config.get(CATEGORY_BOW, I18n.format(""), 0xff4000).getInt(0xff4000);
-        INFINITY = config.get(CATEGORY_BOW, I18n.format(""), 0xcc00ff).getInt(0xcc00ff);
-        POWER = config.get(CATEGORY_BOW, I18n.format(""), 0xff9933).getInt(0xff9933);
-        PUNCH = config.get(CATEGORY_BOW, I18n.format(""), 0x6600ff).getInt(0x6600ff);
+        FLAME = config.get(CATEGORY_BOW, I18n.format("enchantment.arrowFire"), 0xff4000).getInt(0xff4000);
+        INFINITY = config.get(CATEGORY_BOW, I18n.format("enchantment.arrowInfinite"), 0xcc00ff).getInt(0xcc00ff);
+        POWER = config.get(CATEGORY_BOW, I18n.format("enchantment.arrowDamage"), 0xff9933).getInt(0xff9933);
+        PUNCH = config.get(CATEGORY_BOW, I18n.format("enchantment.arrowKnockback"), 0x6600ff).getInt(0x6600ff);
 
         // Tool enchantments
-        EFFICIENCY = config.get(CATEGORY_TOOL, I18n.format(""), 0x33ccff).getInt(0x33ccff);
-        FORTUNE = config.get(CATEGORY_TOOL, I18n.format(""), 0xffe066).getInt(0xffe066);
-        SILK_TOUCH = config.get(CATEGORY_TOOL, I18n.format(""), 0xccff99).getInt(0xccff99);
+        EFFICIENCY = config.get(CATEGORY_TOOL, I18n.format("enchantment.digging"), 0x33ccff).getInt(0x33ccff);
+        FORTUNE = config.get(CATEGORY_TOOL, I18n.format("enchantment.lootBonusDigger"), 0xffe066).getInt(0xffe066);
+        SILK_TOUCH = config.get(CATEGORY_TOOL, I18n.format("enchantment.untouching"), 0xccff99).getInt(0xccff99);
 
         // Fishing rod enchantments
-        LUCK_OF_THE_SEA = config.get(CATEGORY_FISHING, I18n.format(""), 0xffe066).getInt(0xffe066);
-        LURE = config.get(CATEGORY_FISHING, I18n.format(""), 0x33ccff).getInt(0x33ccff);
+        LUCK_OF_THE_SEA = config.get(CATEGORY_FISHING, I18n.format("enchantment.lootBonusFishing"), 0xffe066).getInt(0xffe066);
+        LURE = config.get(CATEGORY_FISHING, I18n.format("enchantment.fishingSpeed"), 0x33ccff).getInt(0x33ccff);
 
         // Armor enchantments
-        AQUA_AFFINITY = config.get(CATEGORY_ARMOR, I18n.format(""), 0x3366ff).getInt(0x3366ff);
-        BLAST_PROTECTION = config.get(CATEGORY_ARMOR, I18n.format(""), 0xcc6699).getInt(0xcc6699);
-        DEPTH_STRIDER = config.get(CATEGORY_ARMOR, I18n.format(""), 0x6666ff).getInt(0x6666ff);
-        FEATHER_FALLING = config.get(CATEGORY_ARMOR, I18n.format(""), 0xccff99).getInt(0xccff99);
-        FIRE_PROTECTION = config.get(CATEGORY_ARMOR, I18n.format(""), 0xff4000).getInt(0xff4000);
-        FROST_WALKER = config.get(CATEGORY_ARMOR, I18n.format(""), 0xccffff).getInt(0xccffff);
-        MENDING = config.get(CATEGORY_ARMOR, I18n.format(""), 0xffe066).getInt(0xffe066);
-        PROJECTILE_PROTECTION = config.get(CATEGORY_ARMOR, I18n.format(""), 0xcc99ff).getInt(0xcc99ff);
-        PROTECTION = config.get(CATEGORY_ARMOR, I18n.format(""), 0x00cc99).getInt(0x00cc99);
-        RESPIRATION = config.get(CATEGORY_ARMOR, I18n.format(""), 0x3366ff).getInt(0x3366ff);
-        THORNS = config.get(CATEGORY_ARMOR, I18n.format(""), 0xff9933).getInt(0xff9933);
+        AQUA_AFFINITY = config.get(CATEGORY_ARMOR, I18n.format("enchantment.waterWorker"), 0x3366ff).getInt(0x3366ff);
+        BLAST_PROTECTION = config.get(CATEGORY_ARMOR, I18n.format("enchantment.protect.explosion"), 0xcc6699).getInt(0xcc6699);
+        DEPTH_STRIDER = config.get(CATEGORY_ARMOR, I18n.format("enchantment.waterWalker"), 0x6666ff).getInt(0x6666ff);
+        FEATHER_FALLING = config.get(CATEGORY_ARMOR, I18n.format("enchantment.protect.fall"), 0xccff99).getInt(0xccff99);
+        FIRE_PROTECTION = config.get(CATEGORY_ARMOR, I18n.format("enchantment.protect.fire"), 0xff4000).getInt(0xff4000);
+        FROST_WALKER = config.get(CATEGORY_ARMOR, I18n.format("enchantment.frostWalker"), 0xccffff).getInt(0xccffff);
+        MENDING = config.get(CATEGORY_ARMOR, I18n.format("enchantment.mending"), 0xffe066).getInt(0xffe066);
+        PROJECTILE_PROTECTION = config.get(CATEGORY_ARMOR, I18n.format("enchantment.protect.projectile"), 0xcc99ff).getInt(0xcc99ff);
+        PROTECTION = config.get(CATEGORY_ARMOR, I18n.format("enchantment.protect.all"), 0x00cc99).getInt(0x00cc99);
+        RESPIRATION = config.get(CATEGORY_ARMOR, I18n.format("enchantment.oxygen"), 0x3366ff).getInt(0x3366ff);
+        THORNS = config.get(CATEGORY_ARMOR, I18n.format("enchantment.thorns"), 0xff9933).getInt(0xff9933);
 
         // Curses
-        VANISHING_CURSE = config.get(CATEGORY_CURSE, I18n.format(""), 0x6600cc).getInt(0x6600cc);
-        BINDING_CURSE = config.get(CATEGORY_CURSE, I18n.format(""), 0xffffff).getInt(0xffffff);
+        VANISHING_CURSE = config.get(CATEGORY_CURSE, I18n.format("enchantment.vanishing_curse"), 0x6600cc).getInt(0x6600cc);
+        BINDING_CURSE = config.get(CATEGORY_CURSE, I18n.format("enchantment.binding_curse"), 0xffffff).getInt(0xffffff);
 
-        DEFAULT = config.get(Configuration.CATEGORY_GENERAL, I18n.format(""), -8372020).getInt(-8372020);
+        DEFAULT = config.get(Configuration.CATEGORY_GENERAL, "Custom Enchantments", -8372020).getInt(-8372020);
 
         // save is useful for the first run where config might not exist, and doesn't hurt
         config.save();

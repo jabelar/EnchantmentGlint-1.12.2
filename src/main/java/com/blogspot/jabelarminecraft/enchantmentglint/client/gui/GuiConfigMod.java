@@ -16,6 +16,10 @@
 
 package com.blogspot.jabelarminecraft.enchantmentglint.client.gui;
 
+import java.util.Collection;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import com.blogspot.jabelarminecraft.enchantmentglint.MainMod;
 import com.blogspot.jabelarminecraft.enchantmentglint.init.ModConfig;
 import com.blogspot.jabelarminecraft.enchantmentglint.utilities.Utilities;
@@ -53,9 +57,17 @@ public class GuiConfigMod extends GuiConfig
      *            the parent
      */
     public GuiConfigMod(GuiScreen parent)
-    {
-        super(parent,
-                new ConfigElement(ModConfig.config.getCategory(Configuration.CATEGORY_GENERAL)).getChildElements(),
+    {  
+        super(parent, 
+                Stream.of(
+                        new ConfigElement(ModConfig.config.getCategory(Configuration.CATEGORY_GENERAL)).getChildElements(), 
+                        new ConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_ARMOR)).getChildElements(), 
+                        new ConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_BOW)).getChildElements(), 
+                        new ConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_SWORD)).getChildElements(), 
+                        new ConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_TOOL)).getChildElements(), 
+                        new ConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_CURSE)).getChildElements())
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList()),
                 MainMod.MODID,
                 false,
                 false,
