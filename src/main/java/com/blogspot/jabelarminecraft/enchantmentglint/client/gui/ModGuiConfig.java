@@ -16,9 +16,8 @@
 
 package com.blogspot.jabelarminecraft.enchantmentglint.client.gui;
 
-import java.util.Collection;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.blogspot.jabelarminecraft.enchantmentglint.MainMod;
 import com.blogspot.jabelarminecraft.enchantmentglint.init.ModConfig;
@@ -35,8 +34,10 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.ConfigElement;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.fml.client.config.DummyConfigElement.DummyCategoryElement;
 import net.minecraftforge.fml.client.config.GuiConfig;
 import net.minecraftforge.fml.client.config.GuiMessageDialog;
+import net.minecraftforge.fml.client.config.IConfigElement;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent.PostConfigChangedEvent;
@@ -58,21 +59,35 @@ public class ModGuiConfig extends GuiConfig
      */
     public ModGuiConfig(GuiScreen parent)
     {  
-        super(parent, 
-                Stream.of(
-                        new ConfigElement(ModConfig.config.getCategory(Configuration.CATEGORY_GENERAL)).getChildElements(), 
-                        new ConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_ARMOR)).getChildElements(), 
-                        new ConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_BOW)).getChildElements(), 
-                        new ConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_SWORD)).getChildElements(), 
-                        new ConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_TOOL)).getChildElements(), 
-                        new ConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_CURSE)).getChildElements())
-                .flatMap(Collection::stream)
-                .collect(Collectors.toList()),
+        super(  parent, 
+                getConfigElements(),
                 MainMod.MODID,
                 false,
                 false,
-                Utilities.stringToGolden(I18n.format("mod_motto"), 7));
+                Utilities.stringToRainbow(I18n.format("mod_motto"))
+                );
         titleLine2 = ModConfig.configFile.getAbsolutePath();
+    }
+
+    private static List<IConfigElement> getConfigElements()
+    {
+        List<IConfigElement> list = new ArrayList<IConfigElement>();
+        list.addAll(new ConfigElement(ModConfig.config.getCategory(Configuration.CATEGORY_GENERAL)).getChildElements());
+        list.add(new DummyCategoryElement("armor", "Armor Enchantments", new ConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_ARMOR)).getChildElements()));
+        list.add(new DummyCategoryElement("bow", "Bow Enchantments", new ConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_BOW)).getChildElements()));
+        list.add(new DummyCategoryElement("sword", "Sword Enchantments", new ConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_SWORD)).getChildElements()));
+        list.add(new DummyCategoryElement("tool", "Tool Enchantments", new ConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_TOOL)).getChildElements()));
+        list.add(new DummyCategoryElement("curse", "Curses", new ConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_CURSE)).getChildElements()));
+        return list;
+//        return Stream.of(
+//                new ConfigElement(ModConfig.config.getCategory(Configuration.CATEGORY_GENERAL)).getChildElements(), 
+//                new ConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_ARMOR)).getChildElements(), 
+//                new ConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_BOW)).getChildElements(), 
+//                new ConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_SWORD)).getChildElements(), 
+//                new ConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_TOOL)).getChildElements(), 
+//                new ConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_CURSE)).getChildElements())
+//        .flatMap(Collection::stream)
+//        .collect(Collectors.toList());
     }
 
     /*
