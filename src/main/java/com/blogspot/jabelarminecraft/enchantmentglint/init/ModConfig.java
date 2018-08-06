@@ -21,6 +21,8 @@ import com.blogspot.jabelarminecraft.enchantmentglint.MainMod;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.config.Property;
+import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 // TODO: Auto-generated Javadoc
@@ -84,7 +86,9 @@ public class ModConfig
 
     public static int DEFAULT = -8372020;
 
+    public static Property.Type CONFIG_TYPE_HEX = EnumHelper.addEnum(Property.Type.class, "Hexadecimal", new Class[0], new Object[0]);
 
+    
     /**
      * Process the configuration.
      *
@@ -99,7 +103,7 @@ public class ModConfig
         System.out.println("Config file exists = " + configFile.canRead());
 
         config = new Configuration(configFile);
-
+        
         syncConfig();
     }
 

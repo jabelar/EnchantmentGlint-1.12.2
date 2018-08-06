@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import com.blogspot.jabelarminecraft.enchantmentglint.init.ModConfig;
+
 import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.Property;
 import net.minecraftforge.fml.client.config.ConfigGuiType;
@@ -93,7 +95,7 @@ public class ModConfigElement implements IConfigElement
     @Override
     public Class<? extends IConfigEntry> getConfigEntryClass()
     {
-        return isProperty ? ModConfigEntry.class) : category.getConfigEntryClass();
+        return isProperty ? ModConfigEntry.class : category.getConfigEntryClass();
     }
 
     @Override
@@ -283,6 +285,8 @@ public class ModConfigElement implements IConfigElement
                 prop.set(Double.parseDouble(value.toString()));
             else if (type == Property.Type.INTEGER)
                 prop.set(Integer.parseInt(value.toString()));
+            else if (type == ModConfig.CONFIG_TYPE_HEX)
+                prop.set(Integer.parseInt(value.toString(), 16));
             else
                 prop.set(value.toString());
         }

@@ -1,5 +1,7 @@
 package com.blogspot.jabelarminecraft.enchantmentglint.client.gui;
 
+import org.lwjgl.input.Keyboard;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
@@ -51,61 +53,61 @@ public class ModConfigEntry extends IntegerEntry
                 Gui.drawRect(textFieldValue.x, textFieldValue.y, textFieldValue.x + textFieldValue.width, textFieldValue.y + textFieldValue.height, -16777216);
             }
 
-            int i = textFieldValue.isEnabled ? textFieldValue.enabledColor : textFieldValue.disabledColor;
-            int j = textFieldValue.getCursorPosition() - textFieldValue.lineScrollOffset;
-            int k = textFieldValue.getSelectionEnd() - textFieldValue.lineScrollOffset;
-            String s = fontRenderer.trimStringToWidth(textFieldValue.getText().substring(textFieldValue.lineScrollOffset), textFieldValue.getWidth());
-            boolean flag = j >= 0 && j <= s.length();
-            boolean flag1 = textFieldValue.isFocused() && textFieldValue.cursorCounter / 6 % 2 == 0 && flag;
-            int l = textFieldValue.getEnableBackgroundDrawing() ? textFieldValue.x + 4 : textFieldValue.x;
-            int i1 = textFieldValue.getEnableBackgroundDrawing() ? textFieldValue.y + (textFieldValue.height - 8) / 2 : textFieldValue.y;
-            int j1 = l;
+            int textColor = 0x6666ff ;
+            int cursorMinusOffset = textFieldValue.getCursorPosition(); // - textFieldValue.lineScrollOffset;
+            int selectionMinusOffset = textFieldValue.getSelectionEnd(); // - textFieldValue.lineScrollOffset;
+            String stringTrimmed = fontRenderer.trimStringToWidth(textFieldValue.getText().substring(0), textFieldValue.getWidth()); //textFieldValue.lineScrollOffset), textFieldValue.getWidth());
+            boolean cursorWithinTrimmedString = cursorMinusOffset >= 0 && cursorMinusOffset <= stringTrimmed.length();
+            boolean flag1 = textFieldValue.isFocused() && cursorWithinTrimmedString; // textFieldValue.cursorCounter / 6 % 2 == 0 && cursorWithinTrimmedString;
+            int posX = textFieldValue.getEnableBackgroundDrawing() ? textFieldValue.x + 4 : textFieldValue.x;
+            int posY = textFieldValue.getEnableBackgroundDrawing() ? textFieldValue.y + (textFieldValue.height - 8) / 2 : textFieldValue.y;
+            int posXAfterRender = posX;
 
-            if (k > s.length())
+            if (selectionMinusOffset > stringTrimmed.length())
             {
-                k = s.length();
+                selectionMinusOffset = stringTrimmed.length();
             }
 
-            if (!s.isEmpty())
+            if (!stringTrimmed.isEmpty())
             {
-                String s1 = flag ? s.substring(0, j) : s;
-                j1 = fontRenderer.drawStringWithShadow(s1, l, i1, i);
+                String s1 = cursorWithinTrimmedString ? stringTrimmed.substring(0, cursorMinusOffset) : stringTrimmed;
+                posXAfterRender = fontRenderer.drawStringWithShadow(s1, posX, posY, textColor);
             }
 
             boolean flag2 = textFieldValue.getCursorPosition() < textFieldValue.getText().length() || textFieldValue.getText().length() >= textFieldValue.getMaxStringLength();
-            int k1 = j1;
+            int k1 = posXAfterRender;
 
-            if (!flag)
+            if (!cursorWithinTrimmedString)
             {
-                k1 = j > 0 ? l + textFieldValue.width : l;
+                k1 = cursorMinusOffset > 0 ? posX + textFieldValue.width : posX;
             }
             else if (flag2)
             {
-                k1 = j1 - 1;
-                --j1;
+                k1 = posXAfterRender - 1;
+                --posXAfterRender;
             }
 
-            if (!s.isEmpty() && flag && j < s.length())
+            if (!stringTrimmed.isEmpty() && cursorWithinTrimmedString && cursorMinusOffset < stringTrimmed.length())
             {
-                j1 = fontRenderer.drawStringWithShadow(s.substring(j), j1, i1, i);
+                posXAfterRender = fontRenderer.drawStringWithShadow(stringTrimmed.substring(cursorMinusOffset), posXAfterRender, posY, textColor);
             }
 
             if (flag1)
             {
                 if (flag2)
                 {
-                    Gui.drawRect(k1, i1 - 1, k1 + 1, i1 + 1 + fontRenderer.FONT_HEIGHT, -3092272);
+                    Gui.drawRect(k1, posY - 1, k1 + 1, posY + 1 + fontRenderer.FONT_HEIGHT, -3092272);
                 }
                 else
                 {
-                    fontRenderer.drawStringWithShadow("_", k1, i1, i);
+                    fontRenderer.drawStringWithShadow("_", k1, posY, textColor);
                 }
             }
 
-            if (k != j)
+            if (selectionMinusOffset != cursorMinusOffset)
             {
-                int l1 = l + fontRenderer.getStringWidth(s.substring(0, k));
-                drawSelectionBox(textFieldValue, k1, i1 - 1, l1 - 1, i1 + 1 + fontRenderer.FONT_HEIGHT);
+                int l1 = posX + fontRenderer.getStringWidth(stringTrimmed.substring(0, selectionMinusOffset));
+                drawSelectionBox(textFieldValue, k1, posY - 1, l1 - 1, posY + 1 + fontRenderer.FONT_HEIGHT);
             }
         }
     }
@@ -154,4 +156,75 @@ public class ModConfigEntry extends IntegerEntry
         GlStateManager.disableColorLogic();
         GlStateManager.enableTexture2D();
     }
+    
+
+    @Override
+    public void keyTyped(char eventChar, int eventKey)
+    {
+        if (enabled() || eventKey == Keyboard.KEY_LEFT || eventKey == Keyboard.KEY_RIGHT || eventKey == Keyboard.KEY_HOME || eventKey == Keyboard.KEY_END)
+        {
+            String validChars = "0123456789ABCDEFabcdef";
+            String before = this.textFieldValue.getText();
+            if (validChars.contains(String.valueOf(eventChar))
+                    || (!before.startsWith("-") && this.textFieldValue.getCursorPosition() == 0 && eventChar == '-')
+                    || eventKey == Keyboard.KEY_BACK || eventKey == Keyboard.KEY_DELETE
+                    || eventKey == Keyboard.KEY_LEFT || eventKey == Keyboard.KEY_RIGHT || eventKey == Keyboard.KEY_HOME || eventKey == Keyboard.KEY_END)
+                this.textFieldValue.textboxKeyTyped((enabled() ? eventChar : Keyboard.CHAR_NONE), eventKey);
+
+            if (!textFieldValue.getText().trim().isEmpty() && !textFieldValue.getText().trim().equals("-"))
+            {
+                try
+                {
+                    long value = Long.parseLong(textFieldValue.getText().trim(), 16);
+                    if (value < Integer.valueOf(configElement.getMinValue().toString()) || value > Integer.valueOf(configElement.getMaxValue().toString()))
+                        this.isValidValue = false;
+                    else
+                        this.isValidValue = true;
+                }
+                catch (Throwable e)
+                {
+                    this.isValidValue = false;
+                }
+            }
+            else
+                this.isValidValue = false;
+        }
+    }
+
+    @Override
+    public boolean saveConfigElement()
+    {
+        if (enabled())
+        {
+            if (isChanged() && this.isValidValue)
+                try
+                {
+                    int value = Integer.parseInt(textFieldValue.getText().trim(), 16);
+                    this.configElement.set(value);
+                    return configElement.requiresMcRestart();
+                }
+                catch (Throwable e)
+                {
+                    this.configElement.setToDefault();
+                }
+            else if (isChanged() && !this.isValidValue)
+                try
+                {
+                    int value = Integer.parseInt(textFieldValue.getText().trim(), 16);
+                    if (value < Integer.valueOf(configElement.getMinValue().toString()))
+                        this.configElement.set(configElement.getMinValue());
+                    else
+                        this.configElement.set(configElement.getMaxValue());
+
+                }
+                catch (Throwable e)
+                {
+                    this.configElement.setToDefault();
+                }
+
+            return configElement.requiresMcRestart() && beforeValue != Integer.parseInt(configElement.get().toString());
+        }
+        return false;
+    }
 }
+
