@@ -95,7 +95,7 @@ public class ModConfigElement implements IConfigElement
     @Override
     public Class<? extends IConfigEntry> getConfigEntryClass()
     {
-        return isProperty ? ModConfigEntry.class : category.getConfigEntryClass();
+        return isProperty ? HexEntry.class : category.getConfigEntryClass();
     }
 
     @Override

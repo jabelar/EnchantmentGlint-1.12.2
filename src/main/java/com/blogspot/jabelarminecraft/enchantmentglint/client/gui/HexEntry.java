@@ -10,18 +10,20 @@ import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.client.config.GuiConfig;
 import net.minecraftforge.fml.client.config.GuiConfigEntries;
 import net.minecraftforge.fml.client.config.GuiConfigEntries.IntegerEntry;
+import net.minecraftforge.fml.client.config.HoverChecker;
 import net.minecraftforge.fml.client.config.IConfigElement;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModConfigEntry extends IntegerEntry
+public class HexEntry extends IntegerEntry
 {
 
-    public ModConfigEntry(GuiConfig owningScreen, GuiConfigEntries owningEntryList, IConfigElement configElement)
+    public HexEntry(GuiConfig owningScreen, GuiConfigEntries owningEntryList, IConfigElement configElement)
     {
         super(owningScreen, owningEntryList, configElement);
         // TODO Auto-generated constructor stub
@@ -30,12 +32,40 @@ public class ModConfigEntry extends IntegerEntry
     @Override
     public void drawEntry(int slotIndex, int x, int y, int listWidth, int slotHeight, int mouseX, int mouseY, boolean isSelected, float partial)
     {
-        super.drawEntry(slotIndex, x, y, listWidth, slotHeight, mouseX, mouseY, isSelected, partial);
-        this.textFieldValue.x = this.owningEntryList.controlX + 2;
-        this.textFieldValue.y = y + 1;
-        this.textFieldValue.width = this.owningEntryList.controlWidth - 4;
-        this.textFieldValue.setEnabled(enabled());
-        this.textFieldValue.drawTextBox();
+        boolean isChanged = isChanged();
+
+        if (drawLabel)
+        {
+            String label = (!isValidValue ? TextFormatting.RED.toString() :
+                    (isChanged ? TextFormatting.WHITE.toString() : TextFormatting.GRAY.toString()))
+                    + (isChanged ? TextFormatting.ITALIC.toString() : "") + name;
+            mc.fontRenderer.drawString(
+                    label,
+                    owningScreen.entryList.labelX,
+                    y + slotHeight / 2 - mc.fontRenderer.FONT_HEIGHT / 2,
+                    16777215);
+        }
+
+        btnUndoChanges.x = owningEntryList.scrollBarX - 44;
+        btnUndoChanges.y = y;
+        btnUndoChanges.enabled = enabled() && isChanged;
+        btnUndoChanges.drawButton(mc, mouseX, mouseY, partial);
+
+        btnDefault.x = owningEntryList.scrollBarX - 22;
+        btnDefault.y = y;
+        btnDefault.enabled = enabled() && !isDefault();
+        btnDefault.drawButton(mc, mouseX, mouseY, partial);
+
+        if (tooltipHoverChecker == null)
+            tooltipHoverChecker = new HoverChecker(y, y + slotHeight, x, owningScreen.entryList.controlX - 8, 800);
+        else
+            tooltipHoverChecker.updateBounds(y, y + slotHeight, x, owningScreen.entryList.controlX - 8);
+
+        textFieldValue.x = owningEntryList.controlX + 2;
+        textFieldValue.y = y + 1;
+        textFieldValue.width = owningEntryList.controlWidth - 4;
+        textFieldValue.setEnabled(enabled());
+        textFieldValue.drawTextBox();
     }
     
     /**
@@ -164,12 +194,12 @@ public class ModConfigEntry extends IntegerEntry
         if (enabled() || eventKey == Keyboard.KEY_LEFT || eventKey == Keyboard.KEY_RIGHT || eventKey == Keyboard.KEY_HOME || eventKey == Keyboard.KEY_END)
         {
             String validChars = "0123456789ABCDEFabcdef";
-            String before = this.textFieldValue.getText();
+            String before = textFieldValue.getText();
             if (validChars.contains(String.valueOf(eventChar))
-                    || (!before.startsWith("-") && this.textFieldValue.getCursorPosition() == 0 && eventChar == '-')
+                    || (!before.startsWith("-") && textFieldValue.getCursorPosition() == 0 && eventChar == '-')
                     || eventKey == Keyboard.KEY_BACK || eventKey == Keyboard.KEY_DELETE
                     || eventKey == Keyboard.KEY_LEFT || eventKey == Keyboard.KEY_RIGHT || eventKey == Keyboard.KEY_HOME || eventKey == Keyboard.KEY_END)
-                this.textFieldValue.textboxKeyTyped((enabled() ? eventChar : Keyboard.CHAR_NONE), eventKey);
+                textFieldValue.textboxKeyTyped((enabled() ? eventChar : Keyboard.CHAR_NONE), eventKey);
 
             if (!textFieldValue.getText().trim().isEmpty() && !textFieldValue.getText().trim().equals("-"))
             {
@@ -177,17 +207,17 @@ public class ModConfigEntry extends IntegerEntry
                 {
                     long value = Long.parseLong(textFieldValue.getText().trim(), 16);
                     if (value < Integer.valueOf(configElement.getMinValue().toString()) || value > Integer.valueOf(configElement.getMaxValue().toString()))
-                        this.isValidValue = false;
+                        isValidValue = false;
                     else
-                        this.isValidValue = true;
+                        isValidValue = true;
                 }
                 catch (Throwable e)
                 {
-                    this.isValidValue = false;
+                    isValidValue = false;
                 }
             }
             else
-                this.isValidValue = false;
+                isValidValue = false;
         }
     }
 
@@ -196,30 +226,30 @@ public class ModConfigEntry extends IntegerEntry
     {
         if (enabled())
         {
-            if (isChanged() && this.isValidValue)
+            if (isChanged() && isValidValue)
                 try
                 {
                     int value = Integer.parseInt(textFieldValue.getText().trim(), 16);
-                    this.configElement.set(value);
+                    configElement.set(value);
                     return configElement.requiresMcRestart();
                 }
                 catch (Throwable e)
                 {
-                    this.configElement.setToDefault();
+                    configElement.setToDefault();
                 }
-            else if (isChanged() && !this.isValidValue)
+            else if (isChanged() && !isValidValue)
                 try
                 {
                     int value = Integer.parseInt(textFieldValue.getText().trim(), 16);
                     if (value < Integer.valueOf(configElement.getMinValue().toString()))
-                        this.configElement.set(configElement.getMinValue());
+                        configElement.set(configElement.getMinValue());
                     else
-                        this.configElement.set(configElement.getMaxValue());
+                        configElement.set(configElement.getMaxValue());
 
                 }
                 catch (Throwable e)
                 {
-                    this.configElement.setToDefault();
+                    configElement.setToDefault();
                 }
 
             return configElement.requiresMcRestart() && beforeValue != Integer.parseInt(configElement.get().toString());
