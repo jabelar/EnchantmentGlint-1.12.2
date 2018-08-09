@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.client.config.GuiConfig;
 import net.minecraftforge.fml.client.config.GuiConfigEntries;
+import net.minecraftforge.fml.client.config.GuiConfigEntries.IConfigEntry;
 import net.minecraftforge.fml.client.config.GuiConfigEntries.IntegerEntry;
 import net.minecraftforge.fml.client.config.HoverChecker;
 import net.minecraftforge.fml.client.config.IConfigElement;
@@ -20,14 +21,17 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class HexEntry extends IntegerEntry
+public class HexEntry extends IntegerEntry implements IConfigEntry
 {
 
     public HexEntry(GuiConfig owningScreen, GuiConfigEntries owningEntryList, IConfigElement configElement)
     {
         super(owningScreen, owningEntryList, configElement);
-        // TODO Auto-generated constructor stub
-    }
+        // DEBUG
+        System.out.println("For entry "+this.configElement.getName()+" text field value before = "+textFieldValue.getText());
+        this.textFieldValue.setText(Integer.toHexString(Integer.parseInt(textFieldValue.getText())));
+        System.out.println("text field value after = "+textFieldValue.getText());
+     }
     
     @Override
     public void drawEntry(int slotIndex, int x, int y, int listWidth, int slotHeight, int mouseX, int mouseY, boolean isSelected, float partial)
