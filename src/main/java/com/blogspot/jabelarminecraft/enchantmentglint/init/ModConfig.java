@@ -24,6 +24,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.fml.client.config.GuiConfigEntries.BooleanEntry;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 // TODO: Auto-generated Javadoc
@@ -119,10 +120,10 @@ public class ModConfig
         config.load();
         
         enableColoredGlint = config.get(Configuration.CATEGORY_GENERAL, I18n.format("config.enable_colored_glint.name"), true,
-                I18n.format("config.enable_colored_glint.tooltip")).getBoolean(true);
+                I18n.format("config.enable_colored_glint.tooltip")).setConfigEntryClass(BooleanEntry.class).getBoolean(true);
 
         useRuneTexture = config.get(Configuration.CATEGORY_GENERAL, I18n.format("config.use_rune_texture.name"), true, 
-                I18n.format("config.use_rune_texture.tooltip")).getBoolean(true);
+                I18n.format("config.use_rune_texture.tooltip")).setConfigEntryClass(BooleanEntry.class).getBoolean(true);
 
 
         // Sword enchantments
@@ -167,7 +168,7 @@ public class ModConfig
         VANISHING_CURSE = config.get(CATEGORY_CURSE, I18n.format("enchantment.vanishing_curse"), 0x6600cc, null, 0, 0xffffff).setConfigEntryClass(HexEntry.class).getInt(0x6600cc);
         BINDING_CURSE = config.get(CATEGORY_CURSE, I18n.format("enchantment.binding_curse"), 0xffffff, null, 0, 0xffffff).setConfigEntryClass(HexEntry.class).getInt(0xffffff);
 
-        DEFAULT = config.get(Configuration.CATEGORY_GENERAL, "Custom Enchantments", -8372020, null, 0, 0xffffff).setConfigEntryClass(HexEntry.class).getInt(-8372020);
+        DEFAULT = config.get(Configuration.CATEGORY_GENERAL, "Custom Enchantments", 0x8040cc, null, 0, 0xffffff).setConfigEntryClass(HexEntry.class).getInt(0x8040cc);
 
         // save is useful for the first run where config might not exist, and doesn't hurt
         config.save();

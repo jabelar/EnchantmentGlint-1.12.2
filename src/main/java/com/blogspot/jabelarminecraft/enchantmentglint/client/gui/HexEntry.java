@@ -1,5 +1,7 @@
 package com.blogspot.jabelarminecraft.enchantmentglint.client.gui;
 
+import java.util.Collections;
+
 import org.lwjgl.input.Keyboard;
 
 import net.minecraft.client.Minecraft;
@@ -10,6 +12,7 @@ import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.client.config.GuiConfig;
 import net.minecraftforge.fml.client.config.GuiConfigEntries;
@@ -28,10 +31,49 @@ public class HexEntry extends IntegerEntry implements IConfigEntry
     {
         super(owningScreen, owningEntryList, configElement);
         // DEBUG
-        System.out.println("For entry "+this.configElement.getName()+" text field value before = "+textFieldValue.getText());
-        this.textFieldValue.setText(Integer.toHexString(Integer.parseInt(textFieldValue.getText())));
+        System.out.println("For entry "+configElement.getName()+" text field value before = "+textFieldValue.getText());
+        textFieldValue.setText(Integer.toHexString(Integer.parseInt(textFieldValue.getText())));
         System.out.println("text field value after = "+textFieldValue.getText());
+        
+        initToolTip();
      }
+    
+    private void initToolTip()
+    {
+        toolTip.clear();
+
+        String comment = I18n.format(configElement.getLanguageKey() + ".tooltip").replace("\\n", "\n");
+
+        if (!comment.equals(configElement.getLanguageKey() + ".tooltip"))
+            Collections.addAll(toolTip, (TextFormatting.GREEN + name + "\n" + TextFormatting.YELLOW + removeTag(comment, "[default:", "]")).split("\n"));
+        else if (configElement.getComment() != null && !configElement.getComment().trim().isEmpty())
+            Collections.addAll(toolTip, (TextFormatting.GREEN + name + "\n" + TextFormatting.YELLOW + removeTag(configElement.getComment(), "[default:", "]")).split("\n"));
+        else
+            Collections.addAll(toolTip, (TextFormatting.GREEN + name + "\n" + TextFormatting.RED + "No tooltip defined.").split("\n"));
+
+        Collections.addAll(toolTip, (TextFormatting.AQUA + I18n.format("fml.configgui.tooltip.defaultNumeric", "0", "FFFFFF", Integer.toHexString(Integer.parseInt((String) configElement.getDefault())))).split("\n"));
+
+        if (configElement.requiresMcRestart() || owningScreen.allRequireMcRestart)
+            toolTip.add(TextFormatting.RED + "[" + I18n.format("fml.configgui.gameRestartTitle") + "]");
+    }
+    
+    /**
+     * Get string surrounding tagged area.
+     */
+    private String removeTag(String target, String tagStart, String tagEnd)
+    {
+        int tagStartPosition = target.indexOf(tagStart);
+        int tagEndPosition = target.indexOf(tagEnd, tagStartPosition + tagStart.length());
+
+        if (-1 == tagStartPosition || -1 == tagEndPosition)
+            return target;
+
+        String taglessResult = target.substring(0, tagStartPosition);
+        taglessResult += target.substring(tagEndPosition + 1, target.length());
+
+        return taglessResult;
+    }
+
     
     @Override
     public void drawEntry(int slotIndex, int x, int y, int listWidth, int slotHeight, int mouseX, int mouseY, boolean isSelected, float partial)
@@ -42,12 +84,12 @@ public class HexEntry extends IntegerEntry implements IConfigEntry
         {
             String label = (!isValidValue ? TextFormatting.RED.toString() :
                     (isChanged ? TextFormatting.WHITE.toString() : TextFormatting.GRAY.toString()))
-                    + (isChanged ? TextFormatting.ITALIC.toString() : "") + name;
+                    + (isChanged ? TextFormatting.ITALIC.toString() : "") + name + " Sample";
             mc.fontRenderer.drawString(
                     label,
                     owningScreen.entryList.labelX,
                     y + slotHeight / 2 - mc.fontRenderer.FONT_HEIGHT / 2,
-                    16777215);
+                    0xFFFFFF);
         }
 
         btnUndoChanges.x = owningEntryList.scrollBarX - 44;
@@ -69,6 +111,7 @@ public class HexEntry extends IntegerEntry implements IConfigEntry
         textFieldValue.y = y + 1;
         textFieldValue.width = owningEntryList.controlWidth - 4;
         textFieldValue.setEnabled(enabled());
+        textFieldValue.setTextColor(isValidValue ? Integer.parseInt(textFieldValue.getText(), 16) : 0xE0E0E0);
         textFieldValue.drawTextBox();
     }
     
@@ -87,7 +130,7 @@ public class HexEntry extends IntegerEntry implements IConfigEntry
                 Gui.drawRect(textFieldValue.x, textFieldValue.y, textFieldValue.x + textFieldValue.width, textFieldValue.y + textFieldValue.height, -16777216);
             }
 
-            int textColor = 0x6666ff ;
+            int textColor = Integer.parseInt(textFieldValue.getText(), 16);
             int cursorMinusOffset = textFieldValue.getCursorPosition(); // - textFieldValue.lineScrollOffset;
             int selectionMinusOffset = textFieldValue.getSelectionEnd(); // - textFieldValue.lineScrollOffset;
             String stringTrimmed = fontRenderer.trimStringToWidth(textFieldValue.getText().substring(0), textFieldValue.getWidth()); //textFieldValue.lineScrollOffset), textFieldValue.getWidth());
@@ -256,9 +299,27 @@ public class HexEntry extends IntegerEntry implements IConfigEntry
                     configElement.setToDefault();
                 }
 
-            return configElement.requiresMcRestart() && beforeValue != Integer.parseInt(configElement.get().toString());
+            return configElement.requiresMcRestart() && beforeValue != Integer.parseInt(configElement.get().toString(), 16);
         }
         return false;
     }
+    
+    @Override
+    public void drawToolTip(int mouseX, int mouseY)
+    {
+        boolean canHover = mouseY < owningScreen.entryList.bottom && mouseY > owningScreen.entryList.top;
+        if (toolTip != null && tooltipHoverChecker != null)
+        {
+            if (tooltipHoverChecker.checkHover(mouseX, mouseY, canHover))
+                owningScreen.drawToolTip(toolTip, mouseX, mouseY);
+        }
+
+        if (undoHoverChecker.checkHover(mouseX, mouseY, canHover))
+            owningScreen.drawToolTip(undoToolTip, mouseX, mouseY);
+
+        if (defaultHoverChecker.checkHover(mouseX, mouseY, canHover))
+            owningScreen.drawToolTip(defaultToolTip, mouseX, mouseY);
+    }
+
 }
 
