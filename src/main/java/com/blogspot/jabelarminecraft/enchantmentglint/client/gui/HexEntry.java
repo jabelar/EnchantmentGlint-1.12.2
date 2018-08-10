@@ -104,6 +104,7 @@ public class HexEntry extends IntegerEntry implements IConfigEntry
         textFieldValue.drawTextBox();
     }
     
+    
     @Override
     public void keyTyped(char eventChar, int eventKey)
     {
@@ -148,11 +149,18 @@ public class HexEntry extends IntegerEntry implements IConfigEntry
             keyTyped((char) Keyboard.CHAR_NONE, Keyboard.KEY_HOME);
         }
     }
+
+    @Override
+    public void undoChanges()
+    {
+        if (enabled())
+            this.textFieldValue.setText(padHexString(Integer.toHexString(beforeValue)));
+    }
     
     private String padHexString(String theString)
     {
         theString = "000000" + theString;
-        return theString.substring(theString.length()-6, theString.length());
+        return theString.substring(theString.length()-6, theString.length()).toLowerCase();
     }    
     
     @Override
