@@ -4,6 +4,7 @@ import java.util.Collections;
 
 import org.lwjgl.input.Keyboard;
 
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.client.config.GuiConfig;
@@ -18,11 +19,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class HexEntry extends IntegerEntry implements IConfigEntry
 {
-
+    private int colorSampleX;
+    private int colorSampleY;
+    
     public HexEntry(GuiConfig owningScreen, GuiConfigEntries owningEntryList, IConfigElement configElement)
     {
         super(owningScreen, owningEntryList, configElement);
-        textFieldValue.setText(Integer.toHexString(Integer.parseInt(textFieldValue.getText())));
+        textFieldValue.setText(padHexString(Integer.toHexString(Integer.parseInt(textFieldValue.getText()))));
         
         initToolTip();
      }
@@ -100,11 +103,14 @@ public class HexEntry extends IntegerEntry implements IConfigEntry
         textFieldValue.y = y + 1;
         textFieldValue.width = owningEntryList.controlWidth - 4;
         textFieldValue.setEnabled(enabled());
-        textFieldValue.setTextColor(isValidValue ? Integer.parseInt(textFieldValue.getText(), 16) : 0xE0E0E0);
         textFieldValue.drawTextBox();
+        
+        colorSampleX = owningEntryList.controlX + owningEntryList.controlWidth - 19;
+        colorSampleY = y;
+        GuiScreen.drawRect(colorSampleX - 1, colorSampleY - 1, colorSampleX + 18 + 1, colorSampleY + 18 + 1, 0xFFFFFF);
+        GuiScreen.drawRect(colorSampleX, colorSampleY, colorSampleX + 18, colorSampleY + 18, 0xFF000000 | (isValidValue ? Integer.parseInt(textFieldValue.getText(), 16) : 0xE0E0E0));
     }
-    
-    
+
     @Override
     public void keyTyped(char eventChar, int eventKey)
     {
