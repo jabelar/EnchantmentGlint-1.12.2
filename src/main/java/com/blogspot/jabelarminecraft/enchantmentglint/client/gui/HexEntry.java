@@ -99,13 +99,13 @@ public class HexEntry extends IntegerEntry implements IConfigEntry
         else
             tooltipHoverChecker.updateBounds(y, y + slotHeight, x, owningScreen.entryList.controlX - 8);
 
-        textFieldValue.x = owningEntryList.controlX + 122;
+        textFieldValue.width = 50;
+        textFieldValue.x = owningEntryList.controlX + + owningEntryList.controlWidth - 19 - 20 - textFieldValue.width;
         textFieldValue.y = y + 1;
-        textFieldValue.width = owningEntryList.controlWidth - 124;
         textFieldValue.setEnabled(enabled());
         textFieldValue.drawTextBox();
         
-        colorSampleX = owningEntryList.controlX + owningEntryList.controlWidth - 19;
+        colorSampleX = owningEntryList.controlX + owningEntryList.controlWidth - 30;
         colorSampleY = y;
         GuiScreen.drawRect(colorSampleX - 1, colorSampleY - 1, colorSampleX + 18 + 1, colorSampleY + 18 + 1, 0xFFFFFF);
         GuiScreen.drawRect(colorSampleX, colorSampleY, colorSampleX + 18, colorSampleY + 18, 0xFF000000 | (isValidValue ? Integer.parseInt(textFieldValue.getText(), 16) : 0xE0E0E0));
