@@ -41,7 +41,7 @@ public class HexEntry extends IntegerEntry implements IConfigEntry
         else if (configElement.getComment() != null && !configElement.getComment().trim().isEmpty())
             Collections.addAll(toolTip, (TextFormatting.GREEN + name + "\n" + TextFormatting.YELLOW + I18n.format(removeTag(configElement.getComment(), "[default:", "]"))).split("\n"));
         else
-            Collections.addAll(toolTip, (TextFormatting.GREEN + name + "\n" + TextFormatting.RED + "Enter RGB value in hex.").split("\n"));
+            Collections.addAll(toolTip, (TextFormatting.GREEN + name + "\n" + TextFormatting.RED + I18n.format("config.enter_hex")).split("\n"));
 
         Collections.addAll(toolTip, (TextFormatting.AQUA + I18n.format("fml.configgui.tooltip.defaultNumeric", "0", "ffffff", Integer.toHexString(Integer.parseInt((String) configElement.getDefault())))).split("\n"));
 

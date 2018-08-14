@@ -37,12 +37,13 @@ public class ModConfig
     public static boolean enableColoredGlint = true;
     public static boolean useRuneTexture = true;
 
-    public static final String CATEGORY_SWORD = "Sword Enchantments";
-    public static final String CATEGORY_BOW = "Bow Enchantments";
-    public static final String CATEGORY_TOOL = "Tool Enchantments";
-    public static final String CATEGORY_FISHING = "Fishing Enchantments";
-    public static final String CATEGORY_ARMOR = "Armor Enchantments";
-    public static final String CATEGORY_CURSE = "Curses";
+    public static final String CATEGORY_SWORD = "config.category.sword";
+    public static final String CATEGORY_BOW = "config.category.bow";
+    public static final String CATEGORY_TOOL = "config.category.tool";
+    public static final String CATEGORY_FISHING = "config.category.fishing";
+    public static final String CATEGORY_ARMOR = "config.category.armor";
+    public static final String CATEGORY_CURSE = "config.cateogry.curse";
+    public static final String CATEGORY_CUSTOM = "config.category.custom";
 
     // Sword enchantments
     public static int BANE_OF_ARTHROPODS = 0xcc00ff;
@@ -168,7 +169,7 @@ public class ModConfig
         VANISHING_CURSE = config.get(CATEGORY_CURSE, I18n.format("enchantment.vanishing_curse"), 0x6600cc, null, 0, 0xffffff).setConfigEntryClass(HexEntry.class).getInt(0x6600cc);
         BINDING_CURSE = config.get(CATEGORY_CURSE, I18n.format("enchantment.binding_curse"), 0xffffff, null, 0, 0xffffff).setConfigEntryClass(HexEntry.class).getInt(0xffffff);
 
-        DEFAULT = config.get(Configuration.CATEGORY_GENERAL, "enchantment.custom", 0x8040cc, "enchantment.custom.comment", 0, 0xffffff).setConfigEntryClass(HexEntry.class).getInt(0x8040cc);
+        DEFAULT = config.get(CATEGORY_CUSTOM, I18n.format("enchantment.custom"), 0x8040cc, "enchantment.custom.comment", 0, 0xffffff).setConfigEntryClass(HexEntry.class).getInt(0x8040cc);
 
         // save is useful for the first run where config might not exist, and doesn't hurt
         config.save();

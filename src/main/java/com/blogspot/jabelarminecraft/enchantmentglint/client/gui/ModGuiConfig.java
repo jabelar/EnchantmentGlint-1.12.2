@@ -78,6 +78,7 @@ public class ModGuiConfig extends GuiConfig
         list.add(new DummyCategoryElement("tool", "config.category.tool", new ModConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_TOOL)).getChildElements()));
         list.add(new DummyCategoryElement("fishing", "config.category.fishing", new ModConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_FISHING)).getChildElements()));
         list.add(new DummyCategoryElement("curse", "config.category.curse", new ModConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_CURSE)).getChildElements()));
+        list.add(new DummyCategoryElement("custom", "config.category.custom", new ModConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_CUSTOM)).getChildElements()));
         return list;
 //        return Stream.of(
 //                new ModConfigElement(ModConfig.config.getCategory(Configuration.CATEGORY_GENERAL)).getChildElements(), 
