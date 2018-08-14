@@ -168,7 +168,7 @@ public class ModConfig
         VANISHING_CURSE = config.get(CATEGORY_CURSE, I18n.format("enchantment.vanishing_curse"), 0x6600cc, null, 0, 0xffffff).setConfigEntryClass(HexEntry.class).getInt(0x6600cc);
         BINDING_CURSE = config.get(CATEGORY_CURSE, I18n.format("enchantment.binding_curse"), 0xffffff, null, 0, 0xffffff).setConfigEntryClass(HexEntry.class).getInt(0xffffff);
 
-        DEFAULT = config.get(Configuration.CATEGORY_GENERAL, "Custom Enchantments", 0x8040cc, null, 0, 0xffffff).setConfigEntryClass(HexEntry.class).getInt(0x8040cc);
+        DEFAULT = config.get(Configuration.CATEGORY_GENERAL, "enchantment.custom", 0x8040cc, "enchantment.custom.comment", 0, 0xffffff).setConfigEntryClass(HexEntry.class).getInt(0x8040cc);
 
         // save is useful for the first run where config might not exist, and doesn't hurt
         config.save();

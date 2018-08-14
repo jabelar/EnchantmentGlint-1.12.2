@@ -39,11 +39,11 @@ public class HexEntry extends IntegerEntry implements IConfigEntry
         if (!comment.equals(configElement.getLanguageKey() + ".tooltip"))
             Collections.addAll(toolTip, (TextFormatting.GREEN + name + "\n" + TextFormatting.YELLOW + removeTag(comment, "[default:", "]")).split("\n"));
         else if (configElement.getComment() != null && !configElement.getComment().trim().isEmpty())
-            Collections.addAll(toolTip, (TextFormatting.GREEN + name + "\n" + TextFormatting.YELLOW + removeTag(configElement.getComment(), "[default:", "]")).split("\n"));
+            Collections.addAll(toolTip, (TextFormatting.GREEN + name + "\n" + TextFormatting.YELLOW + I18n.format(removeTag(configElement.getComment(), "[default:", "]"))).split("\n"));
         else
-            Collections.addAll(toolTip, (TextFormatting.GREEN + name + "\n" + TextFormatting.RED + "No tooltip defined.").split("\n"));
+            Collections.addAll(toolTip, (TextFormatting.GREEN + name + "\n" + TextFormatting.RED + "Enter RGB value in hex.").split("\n"));
 
-        Collections.addAll(toolTip, (TextFormatting.AQUA + I18n.format("fml.configgui.tooltip.defaultNumeric", "0", "FFFFFF", Integer.toHexString(Integer.parseInt((String) configElement.getDefault())))).split("\n"));
+        Collections.addAll(toolTip, (TextFormatting.AQUA + I18n.format("fml.configgui.tooltip.defaultNumeric", "0", "ffffff", Integer.toHexString(Integer.parseInt((String) configElement.getDefault())))).split("\n"));
 
         if (configElement.requiresMcRestart() || owningScreen.allRequireMcRestart)
             toolTip.add(TextFormatting.RED + "[" + I18n.format("fml.configgui.gameRestartTitle") + "]");
