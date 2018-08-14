@@ -22,8 +22,6 @@ import com.blogspot.jabelarminecraft.enchantmentglint.client.gui.HexEntry;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.config.Property;
-import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.client.config.GuiConfigEntries.BooleanEntry;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
@@ -87,8 +85,6 @@ public class ModConfig
     public static int BINDING_CURSE = 0xffffff;
 
     public static int DEFAULT = -8372020;
-
-    public static Property.Type CONFIG_TYPE_HEX = EnumHelper.addEnum(Property.Type.class, "Hexadecimal", new Class[0], new Object[0]);
 
     
     /**
