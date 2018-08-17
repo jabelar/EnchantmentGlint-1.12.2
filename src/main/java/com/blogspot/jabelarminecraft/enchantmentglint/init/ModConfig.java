@@ -22,9 +22,6 @@ import com.blogspot.jabelarminecraft.enchantmentglint.client.gui.HexEntry;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.config.Property;
-import net.minecraftforge.common.util.EnumHelper;
-import net.minecraftforge.fml.client.config.GuiConfigEntries.BooleanEntry;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 // TODO: Auto-generated Javadoc
@@ -89,8 +86,6 @@ public class ModConfig
 
     public static int DEFAULT = -8372020;
 
-    public static Property.Type CONFIG_TYPE_HEX = EnumHelper.addEnum(Property.Type.class, "Hexadecimal", new Class[0], new Object[0]);
-
     
     /**
      * Process the configuration.
@@ -121,10 +116,10 @@ public class ModConfig
         config.load();
         
         enableColoredGlint = config.get(Configuration.CATEGORY_GENERAL, I18n.format("config.enable_colored_glint.name"), true,
-                I18n.format("config.enable_colored_glint.tooltip")).setConfigEntryClass(BooleanEntry.class).getBoolean(true);
+                I18n.format("config.enable_colored_glint.tooltip")).getBoolean(true);
 
         useRuneTexture = config.get(Configuration.CATEGORY_GENERAL, I18n.format("config.use_rune_texture.name"), true, 
-                I18n.format("config.use_rune_texture.tooltip")).setConfigEntryClass(BooleanEntry.class).getBoolean(true);
+                I18n.format("config.use_rune_texture.tooltip")).getBoolean(true);
 
 
         // Sword enchantments

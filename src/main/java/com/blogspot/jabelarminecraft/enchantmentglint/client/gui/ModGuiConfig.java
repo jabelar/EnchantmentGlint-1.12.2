@@ -32,6 +32,7 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.ConfigElement;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.config.DummyConfigElement.DummyCategoryElement;
 import net.minecraftforge.fml.client.config.GuiConfig;
@@ -71,7 +72,7 @@ public class ModGuiConfig extends GuiConfig
     private static List<IConfigElement> getConfigElements()
     {
         List<IConfigElement> list = new ArrayList<IConfigElement>();
-        list.addAll(new ModConfigElement(ModConfig.config.getCategory(Configuration.CATEGORY_GENERAL)).getChildElements());
+        list.addAll(new ConfigElement(ModConfig.config.getCategory(Configuration.CATEGORY_GENERAL)).getChildElements());
         list.add(new DummyCategoryElement("armor", "config.category.armor", new ModConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_ARMOR)).getChildElements()));
         list.add(new DummyCategoryElement("bow", "config.category.bow", new ModConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_BOW)).getChildElements()));
         list.add(new DummyCategoryElement("sword", "config.category.sword", new ModConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_SWORD)).getChildElements()));
@@ -80,15 +81,6 @@ public class ModGuiConfig extends GuiConfig
         list.add(new DummyCategoryElement("curse", "config.category.curse", new ModConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_CURSE)).getChildElements()));
         list.add(new DummyCategoryElement("custom", "config.category.custom", new ModConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_CUSTOM)).getChildElements()));
         return list;
-//        return Stream.of(
-//                new ModConfigElement(ModConfig.config.getCategory(Configuration.CATEGORY_GENERAL)).getChildElements(), 
-//                new ModConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_ARMOR)).getChildElements(), 
-//                new ModConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_BOW)).getChildElements(), 
-//                new ModConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_SWORD)).getChildElements(), 
-//                new ModConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_TOOL)).getChildElements(), 
-//                new ModConfigElement(ModConfig.config.getCategory(ModConfig.CATEGORY_CURSE)).getChildElements())
-//        .flatMap(Collection::stream)
-//        .collect(Collectors.toList());
     }
 
     /*

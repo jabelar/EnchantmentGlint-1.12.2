@@ -20,4 +20,3 @@ config.category.curse=Curses
 config.category.curse.tooltip=Configure colours for curses
 config.category.custom=Custom Enchantments
 config.category.custom.tooltip=Configure colours for other mods' enchantments
-

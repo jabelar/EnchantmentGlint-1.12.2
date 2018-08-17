@@ -107,7 +107,7 @@ public class Utilities
                 TextFormatting.YELLOW,
                 TextFormatting.GREEN,
                 TextFormatting.AQUA,
-                TextFormatting.BLUE,
+                TextFormatting.DARK_AQUA,
                 TextFormatting.LIGHT_PURPLE,
                 TextFormatting.DARK_PURPLE
         };
