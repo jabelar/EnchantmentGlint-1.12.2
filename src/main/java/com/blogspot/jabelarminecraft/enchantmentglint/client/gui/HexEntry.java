@@ -9,7 +9,6 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.client.config.GuiConfig;
 import net.minecraftforge.fml.client.config.GuiConfigEntries;
-import net.minecraftforge.fml.client.config.GuiConfigEntries.IConfigEntry;
 import net.minecraftforge.fml.client.config.GuiConfigEntries.IntegerEntry;
 import net.minecraftforge.fml.client.config.HoverChecker;
 import net.minecraftforge.fml.client.config.IConfigElement;
@@ -17,7 +16,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class HexEntry extends IntegerEntry implements IConfigEntry
+public class HexEntry extends IntegerEntry 
 {
     private int colorSampleX;
     private int colorSampleY;
