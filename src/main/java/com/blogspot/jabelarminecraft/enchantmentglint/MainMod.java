@@ -43,7 +43,7 @@ public class MainMod
 {
     public static final String MODID = "enchantmentglint";
     public static final String MODNAME = "Jabelar's Truly Magical Enchantment Glint";
-    public static final String MODVERSION = "1.0.0";
+    public static final String MODVERSION = "1.0.1";
     public static final String MODDESCRIPTION = "Control the colors of your enchantments.";
     public static final String MODAUTHOR = "jabelar";
     public static final String MODCREDITS = "Jnaejnae";
