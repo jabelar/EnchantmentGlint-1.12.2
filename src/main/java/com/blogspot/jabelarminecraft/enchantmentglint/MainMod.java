@@ -19,7 +19,6 @@ package com.blogspot.jabelarminecraft.enchantmentglint;
 import com.blogspot.jabelarminecraft.enchantmentglint.init.ModConfig;
 import com.blogspot.jabelarminecraft.enchantmentglint.proxy.IProxy;
 import com.blogspot.jabelarminecraft.enchantmentglint.utilities.Utilities;
-
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -33,7 +32,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 @Mod(   modid = MainMod.MODID,
         name = MainMod.MODNAME,
         version = MainMod.MODVERSION,
-        guiFactory = "com.blogspot.jabelarminecraft." + MainMod.MODID + ".client.gui.GuiFactory",
+        guiFactory = "com.blogspot.jabelarminecraft.enchantmentglint.client.gui.GuiFactory",
         acceptedMinecraftVersions = "[1.12]",
         acceptableRemoteVersions = "*",
         clientSideOnly = true,
@@ -41,7 +40,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
         )
 public class MainMod
 {
-    public static final String MODID = "enchantmentglint";
+    public static final String MODID = "aaenchantmentglint";
     public static final String MODNAME = "Jabelar's Truly Magical Enchantment Glint";
     public static final String MODVERSION = "1.0.1";
     public static final String MODDESCRIPTION = "Control the colors of your enchantments.";

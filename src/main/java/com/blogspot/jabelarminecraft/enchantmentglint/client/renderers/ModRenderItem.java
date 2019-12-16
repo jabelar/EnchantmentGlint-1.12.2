@@ -5,7 +5,6 @@ import java.util.List;
 import com.blogspot.jabelarminecraft.enchantmentglint.MainMod;
 import com.blogspot.jabelarminecraft.enchantmentglint.init.ModConfig;
 import com.blogspot.jabelarminecraft.enchantmentglint.proxy.ClientProxy;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -21,7 +20,6 @@ import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.texture.TextureUtil;
-import net.minecraft.client.renderer.tileentity.TileEntityItemStackRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.item.ItemStack;
@@ -46,6 +44,9 @@ public class ModRenderItem extends RenderItem
         textureManager = parTextureManager;
         itemColors = parItemColors;
         itemModelMesher = parItemModelMesher;
+        
+        // DEBUG
+        System.out.println("ItemModelMesher "+itemModelMesher);
     }
 
     @Override
@@ -60,7 +61,7 @@ public class ModRenderItem extends RenderItem
             {
                 GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
                 GlStateManager.enableRescaleNormal();
-                TileEntityItemStackRenderer.instance.renderByItem(stack);
+                stack.getItem().getTileEntityItemStackRenderer().renderByItem(stack);
             }
             else
             {
@@ -138,7 +139,8 @@ public class ModRenderItem extends RenderItem
         tessellator.draw();
     }
     
-    private void renderQuads(BufferBuilder renderer, List<BakedQuad> quads, int color, ItemStack stack)
+    @Override
+    public void renderQuads(BufferBuilder renderer, List<BakedQuad> quads, int color, ItemStack stack)
     {
         boolean flag = color == -1 && !stack.isEmpty();
         int i = 0;

@@ -57,6 +57,7 @@ public class GuiFactory implements IModGuiFactory
     @Override
     public boolean hasConfigGui()
     {
+        System.out.println("Has config GUI");
         return true;
     }
 
