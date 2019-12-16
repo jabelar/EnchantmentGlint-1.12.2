@@ -40,7 +40,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
         )
 public class MainMod
 {
-    public static final String MODID = "aaenchantmentglint";
+    public static final String MODID = "enchantmentglint";
     public static final String MODNAME = "Jabelar's Truly Magical Enchantment Glint";
     public static final String MODVERSION = "1.0.1";
     public static final String MODDESCRIPTION = "Control the colors of your enchantments.";
