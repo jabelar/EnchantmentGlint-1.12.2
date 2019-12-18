@@ -32,7 +32,6 @@ import com.blogspot.jabelarminecraft.enchantmentglint.client.renderers.ModRender
 import com.blogspot.jabelarminecraft.enchantmentglint.client.renderers.ModRenderZombie;
 import com.blogspot.jabelarminecraft.enchantmentglint.client.renderers.ModRenderZombieVillager;
 import com.blogspot.jabelarminecraft.enchantmentglint.init.ModConfig;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.RenderItem;
@@ -65,13 +64,16 @@ import net.minecraft.entity.projectile.EntityPotion;
 import net.minecraft.entity.projectile.EntitySnowball;
 import net.minecraft.init.Enchantments;
 import net.minecraft.init.Items;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
+import org.apache.logging.log4j.LogManager;
 
 
 // TODO: Auto-generated Javadoc
+@SuppressWarnings("deprecation")
 @EventBusSubscriber(value = Side.CLIENT, modid = MainMod.MODID)
 public class ClientProxy implements IProxy
 {
@@ -82,7 +84,6 @@ public class ClientProxy implements IProxy
     public static Field playerRenderer = ReflectionHelper.findField(RenderManager.class, "playerRenderer", "field_178637_m");
     public static Field skinMap = ReflectionHelper.findField(RenderManager.class, "skinMap", "field_178636_l");
 
-
     /* (non-Javadoc)
      * @see com.blogspot.jabelarminecraft.examplemod.proxy.IProxy#init(net.minecraftforge.fml.common.event.FMLInitializationEvent)
      */
@@ -92,10 +93,14 @@ public class ClientProxy implements IProxy
         replaceRenderers();       
     }
     
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @SuppressWarnings({ "unchecked" })
     public void replaceRenderers()
     {
         Minecraft mc = Minecraft.getMinecraft();
+        
+        //DEBUG
+        System.out.println("Active mod list = "+Loader.instance().getActiveModList());
+        LogManager.getLogger().info("Active mod list = "+Loader.instance().getActiveModList());
         
         // Replace render item with custom version
         modelManager.setAccessible(true);

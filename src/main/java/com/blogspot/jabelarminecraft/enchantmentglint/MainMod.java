@@ -36,7 +36,8 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
         acceptedMinecraftVersions = "[1.12]",
         acceptableRemoteVersions = "*",
         clientSideOnly = true,
-        updateJSON = "https://raw.githubusercontent.com/jabelar/EnchantmentGlint-1.12.2/master/src/main/resources/versionChecker.json"
+        updateJSON = "https://raw.githubusercontent.com/jabelar/EnchantmentGlint-1.12.2/master/src/main/resources/versionChecker.json",
+        dependencies = "before:*"
         )
 public class MainMod
 {
