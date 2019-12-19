@@ -2,12 +2,13 @@
   "homepage": "http://jabelarminecraftmods.blogspot.com/",
   "promos": 
   {
-    "1.12.2-latest": "1.0.1",
-    "1.12.2-recommended": "1.0.1"
+    "1.12.2-latest": "1.0.2",
+    "1.12.2-recommended": "1.0.2"
   },
   "1.12.2": 
   {
     "1.0.0": "jabelar: Inital release.",
-    "1.0.1": "jabelar: Fixed item frames which still showed vanilla glint."
+    "1.0.1": "jabelar: Fixed item frames which still showed vanilla glint.",
+    "1.0.2": "jabelar: Fixed compability with many mods that have custom item models"
   }
 }
