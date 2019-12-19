@@ -64,12 +64,10 @@ import net.minecraft.entity.projectile.EntityPotion;
 import net.minecraft.entity.projectile.EntitySnowball;
 import net.minecraft.init.Enchantments;
 import net.minecraft.init.Items;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
-import org.apache.logging.log4j.LogManager;
 
 
 // TODO: Auto-generated Javadoc
@@ -98,17 +96,13 @@ public class ClientProxy implements IProxy
     {
         Minecraft mc = Minecraft.getMinecraft();
         
-        //DEBUG
-        System.out.println("Active mod list = "+Loader.instance().getActiveModList());
-        LogManager.getLogger().info("Active mod list = "+Loader.instance().getActiveModList());
-        
         // Replace render item with custom version
         modelManager.setAccessible(true);
         renderItem.setAccessible(true);
         playerRenderer.setAccessible(true);
         try
         {
-            modRenderItem = new ModRenderItem(mc.getTextureManager(), (ModelManager) modelManager.get(mc), mc.getItemColors(), ((RenderItem)renderItem.get(mc)).getItemModelMesher());
+            modRenderItem = new ModRenderItem((RenderItem)renderItem.get(mc), (ModelManager) modelManager.get(mc)); // , mc.getTextureManager(), (ModelManager) modelManager.get(mc), mc.getItemColors(), ((RenderItem)renderItem.get(mc)).getItemModelMesher());
             renderItem.set(mc, modRenderItem);
             itemRenderer.set(mc.getItemRenderer(), modRenderItem);
             playerRenderer.set(mc.getRenderManager(), new ModRenderPlayer(mc.getRenderManager()));
